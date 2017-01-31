@@ -1,5 +1,7 @@
-#Thinking-in-java  
-##pro  
+#Thinking-in-java
+==================
+pro
+---------------
 * china   
 ###yu
 * 控制台输入数字（如51.63）
