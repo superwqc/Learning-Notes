@@ -1,15 +1,13 @@
-StringBuilderºÍStringBufferÓĞÄÄĞ©Çø±ğÄØ
+StringBuilderå’ŒStringBufferæœ‰å“ªäº›åŒºåˆ«å‘¢
 
-×îÖ÷ÒªµÄÇø±ğ£¬StringBufferµÄÊµÏÖÓÃÁËsynchronized£¨Ëø£©£¬¶øStringBuilderÃ»ÓĞ¡£
+ æœ€ä¸»è¦çš„åŒºåˆ«ï¼ŒStringBufferçš„å®ç°ç”¨äº†synchronizedï¼ˆé”ï¼‰ï¼Œè€ŒStringBuilderæ²¡æœ‰ã€‚
+ å› æ­¤ï¼ŒStringBuilderä¼šæ¯”StringBufferå¿«ã€‚
 
-Òò´Ë£¬StringBuilder»á±ÈStringBuffer¿ì¡£
+ å¦‚æœè¿½æ±‚æ€§èƒ½ï¼ˆå…¶å®è¿™ä¸¤ä¸ªéƒ½ä¸æ…¢ï¼Œæ¯”ç›´æ¥æ“ä½œStringå¿«å¤šäº†ï¼‰ã€ä¸éœ€è¦è€ƒè™‘çº¿ç¨‹å®‰å…¨é—®é¢˜ã€JREæ˜¯1.5+
+ å¯ä»¥ç”¨StringBuilder,åä¹‹ï¼Œè¯·ç”¨StringBufferã€‚
 
-Èç¹û×·ÇóĞÔÄÜ£¨ÆäÊµÕâÁ½¸ö¶¼²»Âı£¬±ÈÖ±½Ó²Ù×÷String¿ì¶àÁË£©¡¢²»ĞèÒª¿¼ÂÇÏß³Ì°²È«ÎÊÌâ¡¢JREÊÇ1.5+
-¿ÉÒÔÓÃStringBuilder,·´Ö®£¬ÇëÓÃStringBuffer¡£
-
-ĞÔÄÜ²âÊÔÀı×Ó:
-
-ÈçÏÂÕâ¸öÀı×Ó£¬Ê¹ÓÃStringBuffer£¬ºÄÊ±2241ms,¶øStringBuilderÊÇ753ms
+æ€§èƒ½æµ‹è¯•ä¾‹å­:
+ä½¿ç”¨StringBufferï¼Œè€—æ—¶2241ms,è€ŒStringBuilderæ˜¯753ms
 
 public class Main {
     public static void main(String[] args) {
