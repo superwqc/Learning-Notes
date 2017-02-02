@@ -1,0 +1,105 @@
+1.冒泡排序
+
+基本思路：用第0个元素与第1个比较，如果第0个比第1个大，那么交换它们的位置。然后第1个与第2个比较，前一个比后一个大，继续交换它们的位置，
+这样以此类推。一轮循环结束以后，最大的元素就跑到了数组的末尾。然后在这样比较数组的前n-1个元素，然第二大的元素跑到数组的倒数第二个位置……
+这样以此类推，就能比较出所有元素了。值得注意的是，如果有一轮冒泡的过程中，并没有任何元素发生位置的交换，那么此时数组已经有序了，不用继续循环了：
+
+void BubbleSort(pArrayList list)  
+{  
+    int tmp;  
+    int change = 0;  
+    //比较的轮数  
+    for(int i = 0; i < list->length-1;++i)  
+    {  
+        change = 0;  
+        //每个元素与他之后的元素比较  
+        for(int j = 0; j < list->length - i -1;++j)  
+        {  
+            //如果它比之后的元素大，交换二者的位置  
+            if(list->data[j] > list->data[j+1])  
+            {  
+                tmp = list->data[j];  
+                list->data[j] = list->data[j+1];  
+                list->data[j+1] = tmp;  
+                ++change;  
+            }  
+  
+        }  
+        //如果没有发生任何交换，那么数组已经有序了  
+        if(0 == change)  
+        {  
+            printf("第%d轮没有比较发生",i);  
+            return ;  
+        }  
+    }  
+}  
+
+
+
+2.插入排序：
+
+基本思路：从数组的第二个元素开始，依次取数组中的元素，将它与前面的的元素相比较，插入到这个元素的前面或者后面（这取决于你想从大往小排序还是从小往大排序）。
+然后再取下一个元素，跟前两个已经有序的数比较，插入到合适的位置。依次类推。下面看一下程序：
+  //插入排序  
+void insertSort(pArrayList list)  
+{  
+    int tmp;  
+    //遍历每个元素  
+    for(int i = 0; i <list->length;++i)  
+    {  
+        //找这个元素之前的元素  
+        for(int j = 0; j <= i;++j)  
+        {  
+            //如果当前元素小于之前的元素，则把当前元素插入到之前元素的位置  
+            if(list->data[j] > list->data[i])  
+            {  
+                deleteElem(list,i,&tmp);  
+                insertElem(list,j,tmp);  
+            }  
+        }  
+    }  
+}  
+
+
+3.选择排序。
+
+从0~n-1个元素中选择最小的元素，与第0个元素交换；从1~n-1个元素中选择最小的元素，与第一个元素位置交换，依次类推。
+  //选择排序  
+void selectSort(pArrayList list)  
+{  
+    int minIndex;  
+    int tmp;  
+    //起始位置不断递增  
+    for(int i = 0 ; i < list->length; ++i)  
+    {  
+        //找出从起始位置到最后一个元素的最小值，并返回它的位置  
+        minIndex = selectMiniElem(list,i);  
+        //如果二者位置不等，则交换它们  
+        if(minIndex != i)  
+        {  
+            tmp = list->data[i];  
+            list->data[i] = list->data[minIndex];  
+            list->data[minIndex] = tmp;  
+        }  
+  
+    }  
+}  
+  
+//返回i~length中最小的元素的下标  
+int selectMiniElem(pArrayList list, int index)  
+{  
+    //min初始为很大的数  
+    int min = 100000;  
+    int minIndex;  
+    for(int i = index ; i < list->length;++i)  
+    {  
+        if(list->data[i] < min)  
+        {  
+            min = list->data[i];  
+            minIndex = i;  
+        }  
+  
+    }  
+    return minIndex;  
+}      
+以上三种排序都是两重循环，复杂度为O（n^2）
