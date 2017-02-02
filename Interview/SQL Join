@@ -64,8 +64,7 @@ JOIN book ON author.id = book.author_id
 
 ANTI JOIN
 
-这个关系的概念与SEMI JOIN恰好相反，你可以通过简单地在IN或者EXISTS前添加NOT来实现它（注：而anti-join则与semi-join相反，即当在第二张表没有发现匹配记录时，才会返回第一张表里的记录；当使用not exists/not in的时候会用到，两者在处理null值的时候会有所区别，见下文所附链接），例如，我们来查询那些没有对应著作的作者信息：
-
+这个关系的概念与SEMI JOIN恰好相反，你可以通过简单地在IN或者EXISTS前添加NOT来实现它（注：而anti-join则与semi-join相反，即当在第二张表没有发现匹配记录时，才会返回第一张表里的记录；当使用not exists/not in的时候会用到，两者在处理null值的时候会有所区别
 -- Using IN
 
 FROM author
