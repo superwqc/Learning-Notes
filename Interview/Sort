@@ -102,4 +102,112 @@ int selectMiniElem(pArrayList list, int index)
     }  
     return minIndex;  
 }      
-以上三种排序都是两重循环，复杂度为O（n^2）
+以上三种排序都是两重循环，复杂度为O（n^2）  
+
+
+
+
+
+
+
+4.快速排序  
+
+基本思路：从数组中挑出一个数（通常选为第一个数），总可以利用这个数把数组分为两部分：大于这个数的部分和小于这个数的部分。
+然后对于这个两部分，分别重复前面的步骤，直到每一部分都只剩下2个数为止，可以比较出来。
+一看就知道是一个递归的程序，但是程序的难点在于：如何从用一个数把数组分为两个部分呢？
+当然。你大可以用一个比较笨的办法：搞一个临时数组，然后把比较的结果放在数组里，然后把数组在赋值给我们的数组。
+通过一个临时变量，就可解决
+
+//利用第一个元素将数组分成两部分，左边部分大于第一个元素，右边部分小于  
+int part(pArrayList list, int low, int high)  
+{  
+    //临时变量，初始化为第一个元素，即分隔的那个数  
+    int val = list->data[low];  
+    while(low < high)  
+    {  
+        //从右向左走，直到遇见一个比分隔数小的数  
+        while(list->data[high] >= val && low < high)  
+            --high;  
+        //将这个数赋给第一个元素的位置，此时high位置就可以赋其他值了  
+        list->data[low] = list->data[high];  
+        //从左往右走，直到遇见一个比分隔数大的元素  
+        while( list->data[low] <= val && low < high)  
+            ++low;  
+        //将这个元素赋给前面已经被保存过的high位置  
+        list->data[high] = list->data[low];  
+    }  
+    //整个循环结束后，low=high  
+    list->data[low] = val;  
+    return high;  
+}  
+
+有了这个程序，我们的排序就很简单了：
+
+//快速排序  
+void quickSort(pArrayList list, int low, int high)  
+{  
+    int mid;  
+    if(low < high)  
+    {  
+        mid = part(list,low,high);  
+        quickSort(list,low,mid-1);  
+        quickSort(list,mid+1,high);  
+    }  
+  
+}注：如果整个数组数组是顺序排列好的或者逆序排列的，那么算法的效率就会差一些。 
+
+
+5.归并排序    
+
+归并排序与分治算法大致一样。基本思想：
+    1.“分”。将一个大数组不停的分解，直到剩下2个元素，然后对它们排序。
+    2.“治”。将两个排好序的2个元素的数组（或者是一个2个元素，一个1个元素）合并成一个有序的大数组。依次类推，递归向上。
+
+
+//归并排序  
+void mergeSort(pArrayList list, int low, int high)  
+{  
+  
+    if(high == low)  
+        return ;  
+    if(low+1 == high)  
+    {  
+        if(list->data[low] > list->data[high])  
+        {  
+            int tmp = list->data[low];  
+            list->data[low] = list->data[high];  
+            list->data[high] = tmp;  
+        }  
+        return;  
+    }  
+    int mid = (high + low) /2;  
+    mergeSort(list, low, mid);  
+    mergeSort(list, mid+1,high);  
+    merge(list, low, mid, high);  
+}  
+  
+//若list的low~mid，mid+1~high均有序，那么将它们合并起来以后依然有序  
+void merge(pArrayList list, int low, int mid, int high)  
+{  
+  
+  
+    int tmp;  
+    for(int i = low; i <= mid; ++i)  
+    {  
+        for(int j = mid+1; j <= high;++j)  
+        {  
+            if(list->data[i] > list->data[j])  
+            {  
+                //将这个元素插入到前面  
+                insertElem(list,i,list->data[j]);  
+                ++mid;  
+                //注意，当你插入一个元素以后以后，由于前面多了一个元素，所以要删除这个元素时，需要删除j+1位置  
+                ++j;  
+                deleteElem(list, j, &tmp);  
+                  
+            }  
+        }  
+  
+    }  
+}  
+算法的复杂度为：O(nlogn)。
