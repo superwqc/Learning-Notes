@@ -43,3 +43,8 @@ LinkedList、ArrayList各自的使用场景，以及如何确认应该用哪个�
   对于随机访问get和set，ArrayList优于linkedlist，因为linkedlist要移动指针
   对于新增和删除操作add和remove，linkedlist比较占优势，因为ArrayList要移动数据
   ArrayList的空间浪费主要体现在list列表的结尾预留一定的容量空间，而linkedlist的空间花费则体现在它的每一个都需要消耗相当的空间
+  
+4.ArrayList的构造函数有三个：
+  1.ArrayList构造一个初始容量为10的空列表
+  2.ArrayList(Collection<? extends E> c)构造一个包含指定collection的元素的列表，这些元素都是按照该collection的迭代器返回它们的顺序排列的
+  3.ArrayList(int initialCapacity)构造一个具有指定初始容量的空列表。调用的第三个构造函数，直接初始化为大小为20的list，没有扩容
