@@ -1,0 +1,181 @@
+我们在开发的过程中经常会遇到多线程问题，多线程在整个java基础也是计较重要的知识点。今天跟大家分享一个我在写程序过程中遇到的线程池的简单应用。
+
+    在Java1.5中提供了一个非常高效实用的多线程包：java.util.concurrent,提供了大量高级 工具，可以帮助开发者编写高效易维护、结构清晰的Java多线程程序。
+
+线程池
+
+    之前我们在使用多线程都是用Thread的start()来创建启动一个线程，但是在实际开发中，如果每个请求到达就创建一个新线程，开销是相当大的。
+    服务器在创建和销毁线程上花费的时间和消耗的 系统资源都相当大，甚至可能要比在处理实际的用请求的时间和资源要多的多。
+    除了创建和销毁线程 的开销之外，活动的线程也需要消耗系统资源。如果在一个jvm里创建太多的线程，可能会使系统由于 过度消耗内存或“切换过度”而导致系统资源不足。这就引入了线程池概念。
+
+    线程池的原理其实就是对多线程的一个管理，为了实现异步机制的一种方法，其实就是多个 线程执行多个任务，最终这些线程通过线程池进行管理...不用手动去维护...
+    一次可以处理多个任务， 这样就可以迅速的进行相应...比如说一个网站成为了热点网站，那么对于大量的点击量，就必须要对 每一次的点击做出迅速的处理，这样才能达到更好的交互效果...这样就需要多个线程去处理这些请求， 以便能够更好的提供服务...
+
+    在java.util.concurrent包下，提供了一系列与线程池相关的类。合理的使用线程池，可以带来多个好处：
+
+（1）降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗；
+
+（2）提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行；
+
+（3）提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。
+
+线程池可以应对突然大爆发量的访问，通过有限个固定线程为大量的操作服务，减少创建和销毁线程所需的时间。
+
+使用线程池：
+
+1.创建线程池
+
+2.创建任务
+
+3.执行任务
+
+4.关闭线程池
+
+
+    一、创建线程池的方法
+
+    我们一般通过工具类Executors的静态方法来获取线程池或静态方法。介绍四种常用创建方法
+
+    ExecutorService executorService1 = Executors.newSingleThreadExecutor();
+
+    单例线程，表示在任意的时间段内，线程池中只有一个线程在工作...
+
+    ExecutorService executorService2 = Executors.newFixedThreadPool(10);
+
+    缓存线程池，先查看线程池中是否有当前执行线程的缓存，如果有就resue(复用),
+    如果没有,那么需要创建一个线程来完成当前的调用.
+    并且这类线程池只能完成一些 生存期很短的一些任务.并且这类线程池内部规定能resue(复用)的线程，空闲的时 间不能超过60s,一旦超过了60s,就会被移出线程池.
+
+    ExecutorService executorService3 = Executors.newScheduledThreadPool(10);
+
+    固定型线程池，和newCacheThreadPool()差不多，也能够实现resue(复用),但是这个池子规定了线程的最大数量，
+    也就是说当池子有空闲时，那么新的任务将会在空闲 线程中被执行，一旦线程池内的线程都在进行工作，
+    那么新的任务就必须等待线程池 有空闲的时候才能够进入线程池,其他的任务继续排队等待.这类池子没有规定其空闲 的时间到底有多长.这一类的池子更适用于服务器.
+
+    ExecutorService executorService4 = Executors.newCacheThreadPool();
+
+    调度型线程池,调度型线程池会根据Scheduled(任务列表)进行延迟执行，或者是进行周期性的执行.适用于一些周期性的工作.
+
+先看一个简单例子：
+
+	public class Executor {
+	public static void main(String[] args) {
+        //定义了线程池中最大存在的线程数目
+        ExecutorService executorService=Executors.newFixedThreadPool(10);
+        //添加了一个任务...
+        executorService.execute(new Runnable() {
+            
+            @Override
+            public void run() {
+                while(true){
+                    System.out.println("begincode");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+}
+执行结果就是无限循环每隔1秒打印一个begincode...
+
+二、创建任务
+
+任务分为两种一种是有返回值的，一种是没有返回值的
+无返回值的任务就是一个实现了 runnable 接口的类.使用run方法
+有返回值的任务是一个实现了 callable 接口的类.使用call方法
+例子：
+public class Begincode implements Runnable {    
+    public void run() {  
+        System.out.println(“Begincode--runable”);  
+    }  
+} 
+public class Begincode implements callable{    
+    public void call() {  
+        System.out.println(“Begincode--callable”);  
+    }  
+} 
+
+三、执行任务
+通过java.util.concurrent.ExecutorService接口对象来执行任务，该对象有两个方法可以执行任务 execute 和 submit 
+execute 这种方式提交没有返回值，也就不能判断是否执行成功。
+
+submit这种方式它会返回一个 Future对象，通过future的get方法来获取返回值，get方法会阻塞住直到任务完成。
+
+四、关闭线程池
+
+当我们不需要使用线程池的时候，我们需要对其进行关闭...有两种方法可以关闭掉线程池... 
+
+shutdown()
+
+  shutdown并不是直接关闭线程池，而是不再接受新的任务...如果线程池内有任务，那么把这些任务执行完毕后，关闭线程池....
+
+shutdownNow()
+
+
+  这个方法表示不再接受新的任务，并把任务队列中的任务直接移出掉，如果有正在执行的，尝试进行停止...
+
+
+
+案例分享
+
+需求：从数据库中获取url，并利用httpclient循环访问url地址，并对返回结果进行操作
+
+分析：由于是循环的对多个url进行访问并获取数据，为了执行的效率，考虑使用多线程，url数量未知如果每个任务都创建一个线程将消耗大量的系统资源，最后决定使用线程池。
+
+给大家贴上代码
+
+public class GetMonitorDataService {
+
+	private Logger logger = LoggerFactory.getLogger(GetMonitorDataService.class);
+	@Resource
+	private MonitorProjectUrlMapper groupUrlMapper;
+	@Resource
+	private MonitorDetailBatchInsertMapper monitorDetailBatchInsertMapper;
+	public void sendData(){
+		//调用dao查询所有url
+		MonitorProjectUrlExample example=new MonitorProjectUrlExample();
+		List<MonitorProjectUrl> list=groupUrlMapper.selectByExample(example);
+		logger.info("此次查询数据库中监控url个数为"+list.size());
+		
+		//获取系统处理器个数，作为线程池数量
+		int nThreads=Runtime.getRuntime().availableProcessors();
+		
+		//定义一个装载多线程返回值的集合
+		List<MonitorDetail> result= Collections.synchronizedList(new ArrayList<MonitorDetail>());
+		//创建线程池，这里定义了一个创建线程池的工具类，避免了创建多个线程池
+		ExecutorService executorService = ThreadPoolFactoryUtil.getExecutorService(nThreads);
+		//遍历数据库取出的url
+		if(list!=null&&list.size()>0) {
+			for (MonitorProjectUrl monitorProjectUrl : list) {
+				String url = monitorProjectUrl.getMonitorUrl();
+				//创建任务
+				ThreadTask threadTask = new ThreadTask(url, result);
+				//执行任务
+				executorService.execute(threadTask);
+			}
+			//对数据进行操作
+			saveData(result);
+		}
+	}
+任务：
+
+public class ThreadTask implements Runnable{
+	//这里实现runnable接口
+	private String url;
+	private List<MonitorDetail> list;
+	public ThreadTask(String url,List<MonitorDetail> list){
+		this.url=url;
+		this.list=list;
+	}
+	//把获取的数据进行处理
+	@Override
+	public void run() {
+		MonitorDetail detail = HttpClientUtil.send(url, MonitorDetail.class);
+		list.add(detail);
+	}
+	
+
+		}
