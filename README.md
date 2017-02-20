@@ -32,7 +32,11 @@
 
 
 #  Algorithm    
--  [Sort](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Sort)  
+-  [Sort](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Sort)
+-  [二维数组中的查找(FindInPartiallySortedMatrix)](https://github.com/superwqc/Coding-Interviews/blob/master/Src/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0)
+-  [替换字符串中的空格(ReplaceSpaces)](https://github.com/superwqc/Coding-Interviews/blob/master/Src/%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E7%A9%BA%E6%A0%BC)
+-  [从尾到头打印链表(PrintListInReversedOrder)](https://github.com/superwqc/Coding-Interviews/blob/master/Src/%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8)
+-  [重建二叉树(RecreateBinaryTree)](https://github.com/superwqc/Coding-Interviews/blob/master/Src/%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91)
 
 
 #  Written Test
