@@ -32,7 +32,7 @@
 
 
 #  Algorithm    
--  [各种排序算法及代码](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Sort)  
+-  [Sort](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Sort)  
 
 
 #  Written Test
