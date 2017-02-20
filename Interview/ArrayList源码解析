@@ -1,24 +1,20 @@
 ArrayList源码　　　　　　　
 　　　　　　1、继承结构和层次关系
- 　　　　　　　　　　　
-　　　　　　　　　　　　　　　ArrayList extends AbstractList
-　　　　　　　　　　　　　　　AbstractList extends AbstractCollection 
-　　　　　　　　　　　　　　　所有类都继承Object 
+ 　　　　　　  ArrayList extends AbstractList
+             AbstractList extends AbstractCollection 
+             所有类都继承Object 
 　　　　　　　　　　　　　　　
-               1、为什么要先继承AbstractList，而让AbstractList先实现List<E>？而不是让ArrayList直接实现List<E>？
+             1、为什么要先继承AbstractList，而让AbstractList先实现List<E>？而不是让ArrayList直接实现List<E>？
 　　　　　　　　　   这里是有一个思想，接口中全都是抽象的方法，而抽象类中可以有抽象方法，还可以有具体的实现方法，
                   正是利用了这一点，让AbstractList是实现接口中一些通用的方法，而具体的类，如ArrayList就继承这个AbstractList类，
                   拿到一些通用的方法，然后自己在实现一些自己特有的方法，这样一来，让代码更简洁，就继承结构最底层的类中通用的方法都抽取出来，先一起实现了，减少重复代码。所以一般看到一个类上面还有一个抽象类，应该就是这个作用
-　　　　　　　　　　　　　 
-　　　　　　　　　　　　　　 
- 　　　　　　　　　　　ArrayList实现了哪些接口？
+　　　　　　　　ArrayList实现了哪些接口？
 　　　　　　　　　　　　1、List<E>接口
 　　　　　　　　　　　　2、RandomAccess接口：这个是一个标记性接口，通过查看api文档，它的作用就是用来快速随机存取，有关效率的问题，
                        在实现了该接口的话，那么使用普通的for循环来遍历，性能更高，例如arrayList。而没有实现该接口的话，使用Iterator来迭代，这样性能更高，例如linkedList。所以这个标记性只是为了让我们知道我们用什么样的方式去获取数据性能更好
 　　　　　　　　　　　　3、Cloneable接口：实现了该接口，就可以使用Object.Clone()方法了。
 　　　　　　　　　　　　4、Serializable接口：实现该序列化接口，表明该类可以被序列化，什么是序列化？简单的说，就是能够从类变成字节流传输，然后还能从字节流变成原来的类。
-　　　　　　　　　　　　　　　　
- 
+　　　　　　
 　　　　　　2、构造方法
  　　　　　　　　　　三个构造方法
 　　　　　　　　　　　　　　　　 
