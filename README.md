@@ -11,7 +11,7 @@
 -  [Simple Factory Pattern](https://github.com/superwqc/Thinking-in-java/blob/master/Design%20Pattern/Creational/Simple%20Factory%20Pattern)
 -  [Chain Of Responsibility](https://github.com/superwqc/Thinking-in-java/blob/master/Design%20Pattern/Behavioral/Chain%20Of%20Responsibility)
 -  [Observer Pattern](https://github.com/superwqc/Thinking-in-java/blob/master/Design%20Pattern/Behavioral/Observer%20Pattern)
--  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [Strategy Pattern](https://github.com/superwqc/Thinking-in-java/blob/master/Design%20Pattern/Behavioral/Strategy%20Pattern)
 -  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
 -  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
 
