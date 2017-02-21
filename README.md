@@ -6,7 +6,15 @@
   
 **Design Pattern**  
 
--  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)      
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
+-  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
 
 
 #  Java  
