@@ -48,5 +48,3 @@
 -  [重建二叉树(RecreateBinaryTree)](https://github.com/superwqc/Coding-Interviews/blob/master/Src/%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91)
 
 
-#  Written Test
-
