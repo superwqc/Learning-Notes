@@ -40,6 +40,22 @@
 -  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
 
 
+***JavaWeb***
+
+-  [System Architecture](https://github.com/superwqc/Learning-notes/blob/master/Servlet/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%88%86%E6%9E%90.txt)
+-  [Cookie](https://github.com/superwqc/Learning-notes/blob/master/Servlet/Cookie)
+-  [HttpSession](https://github.com/superwqc/Learning-notes/blob/master/Servlet/HttpSession)
+-  [Http  GET/POST](https://github.com/superwqc/Learning-notes/blob/master/Servlet/Http%E5%8D%8F%E8%AE%AE%20GET%5CPOST)
+-  [Servletconfig/ServletContext](https://github.com/superwqc/Learning-notes/blob/master/Servlet/Servletconfig%E5%8F%8AServletContext%E6%8E%A5%E5%8F%A3)
+-  [Servlet Lifecycle I](https://github.com/superwqc/Learning-notes/blob/master/Servlet/Servlet%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F1)
+-  [Servlet Lifecycle II](https://github.com/superwqc/Learning-notes/blob/master/Servlet/Servlet%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F2)
+-  [Servlet Principle](https://github.com/superwqc/Learning-notes/blob/master/Servlet/Servlet%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86)
+-  [url-pattern](https://github.com/superwqc/Learning-notes/blob/master/Servlet/url-pattern)
+-  [保证前端请求和后台程序处理方式一致](https://github.com/superwqc/Learning-notes/blob/master/Servlet/%E4%BF%9D%E8%AF%81%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%92%8C%E5%90%8E%E5%8F%B0%E7%A8%8B%E5%BA%8F%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F%E4%B8%80%E8%87%B4)
+-  [Forward/Redirect](https://github.com/superwqc/Learning-notes/blob/master/Servlet/%E8%BD%AC%E5%8F%91%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91)
+-  [JSP](https://github.com/superwqc/Learning-notes/blob/master/Servlet/JSP)
+
+
 
 
 #  DataBase  
