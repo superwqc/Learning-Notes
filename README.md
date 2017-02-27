@@ -36,7 +36,7 @@
 -  [Multithread](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%8A%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%BA%94%E7%94%A8)
 -  [Enumeration和Iterator](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Enumeration%E5%92%8CIterator)
 -  [堆结构 永久代(Perm Gen space)](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E5%A0%86%E7%BB%93%E6%9E%84%20%20%E4%BB%80%E4%B9%88%E6%98%AF%E5%A0%86%E4%B8%AD%E7%9A%84%E6%B0%B8%E4%B9%85%E4%BB%A3(Perm%20Gen%20space)%3F)
--  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
+-  [两种异常类型](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E4%B8%A4%E7%A7%8D%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B)
 -  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
 
 
