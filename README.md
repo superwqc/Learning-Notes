@@ -21,6 +21,7 @@
 **JavaSE**
 
 -  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
+-  [Finalize()和析构函数(finalization)](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Finalize()%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0(finalization))
 -  [Collection](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Collection)
 -  [HashMap和HashTable](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/HashMap%E5%92%8CHashTable)
 -  [HashMap源码解析](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/HashMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)
@@ -34,7 +35,6 @@
 -  [容器(Container)](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Container)
 -  [Multithread](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%8A%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%BA%94%E7%94%A8)
 -  [Enumeration和Iterator](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Enumeration%E5%92%8CIterator)
--  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
 -  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
 -  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
 -  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
