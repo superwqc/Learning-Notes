@@ -14,6 +14,12 @@
 -  [Strategy Pattern](https://github.com/superwqc/Thinking-in-java/blob/master/Design%20Pattern/Behavioral/Strategy%20Pattern)
 -  [设计模式趣谈](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E8%B0%88)
 
+**面向对象六大原则**
+-  [开闭原则(Open-Close Principle)](https://github.com/superwqc/Thinking-in-java/tree/master/Principle/Five)
+-  [迪米特原则( Law of Demeter)](https://github.com/superwqc/Thinking-in-java/tree/master/Principle/Four)
+-  [单一原则(Single Responsibility Principle)/里氏替换原则(Liskov Substitution Principle)](https://github.com/superwqc/Thinking-in-java/tree/master/Principle/One)
+-  [接口隔离原则(Interface Segregation Principle)](https://github.com/superwqc/Thinking-in-java/tree/master/Principle/Three)
+-  [依赖倒置原则(Dependence Inversion Principle)](https://github.com/superwqc/Thinking-in-java/tree/master/Principle/Two)
 
 
 #  Java  
