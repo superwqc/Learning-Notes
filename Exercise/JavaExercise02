@@ -1,0 +1,70 @@
+1.数据类型转换问题：由大到小需要强制转换，由小到大则不用。
+
+2.float占4个字节，但是却比long占8个字节大，因为底层实现方式不同。
+浮点数的32位并不是简单表示大小，而是有一定的标准分配。
+第一位符号位，即S。接下来的8位，指数域，即E。剩下的23位，小数域，即M，取值范围【1,2）或【0,1）公式为V=（-1）^S*M*2^E.故浮点数虽然只有4个字节，但是表示的范围要比长整型大。
+
+
+
+3.信息系统一般泛指收集、存储、处理和传播各种信息，具有完整功能的集合体。四个主要阶段
+1>电子数据处理系统（EDPS）：简单的数据处理，仅用于科学计算，较少涉及管理内容，如计算工资，统计账目等
+2>事务处理系统（TPS）：对企业局部事物的管理，如财会、销售、物资、生产管理
+3>管理信息系统（MIS）：是用系统思想建立起来，以电子计算为基本信息处理手段，以现代通讯设备为基本传输工具，且能为管理决策提供信息化服务的人机系统，MIS集成了事务处理的局部应用，形成全局性、整体性的计算机应用。、
+4>决策支持系统（DSS）：为高层决策提供支持的系统，如ERP，SRM
+
+
+
+4.面向对象的五大基本原则：
+单一职责原则（SRP）Single-Resposibility Principle
+开放封闭原则（OCP）Open-Closed Principle
+里氏替换原则（LSP）Lisko-Substitution Principle
+依赖倒置原则（DIP）Dependency-Inversion Principle
+接口隔离原则（ISP）Interface-Segregation Principle
+soild(立方体)
+
+
+
+5.Spring依赖注入（DI）三种方式：
+接口注入、Setter方法注入、构造方法注入
+
+
+
+6.java两种方式实现线程：
+1> class A 继承 Thread，重写run方法。new A().start()就执行了线程。
+2> class A 实现Runnable，实现run方法。new Thread(new A()).start()
+
+
+
+7.byte+byte=int
+byte、short计算时会自定转为int型
+byte<chat<short<int<long<float<double
+
+
+
+8.Hashset内部使用Map保存数据，将Hashset的数据作为Map的key值保存，这也是hashset中元素不能重复的原因。
+Map保存key值前，会判断当前Map中是否含有key对象，内部先通过key的hashcode，再通过equals方法判断是否相同
+
+
+
+
+9.静态块：static声明，JVM加载类时，仅执行一次
+构造块：类中用{}定义，没创建一次对象执行。
+优先级顺序：静态块>main()>构造块>构造方法
+
+
+
+10.sleep和wait的区别
+这两个方法来自不同的类Thread和Object。
+sleep方法没有释放锁，而wait释放了锁。
+使得敏感词线程可以同步控制块或者方法。
+wait、notify和notifyAll只能在同步块里面使用，而sleep可以在任何地方使用。
+sleep必须捕获异常，而wait、notify、notifyAll不需要。
+
+
+
+
+11.Integer a=1000,b=1000;
+system.out.println(a==b);//false
+Integer a=100,b=100;
+system.out.println(a==b);true
+

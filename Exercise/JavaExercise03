@@ -1,0 +1,62 @@
+1.创建并启动线程的过程为：
+    定义线程->实例化线程->启动线程
+    一、定义线程：
+      1.扩展java.lang.Thread类
+      2.实现java.lang.Runnable接口
+    二、实例化线程：
+      1.如果是扩展java.lang.Thread类，则new即可
+      2.如果是实现java.lang.Runnable接口，则用Thread构造方法
+        Thread(Runnable target)
+        Thread(Runnable target,String name)
+        Thread(ThreadGroup group,Runnable target)
+        Thread(ThreadGroup group,Runnable target,String name)
+        Thread(ThreadGroup group,Runnable target,String name,long stackSize)
+    三、启动线程：
+      在线程的Thread对象上调用start()方法，而不是run方法或者别的方法。
+      
+2.线程停止的三种方式：
+  1.调用stop方法
+  2.线程执行完成
+  3.异常抛出
+  4.休眠、阻塞
+  
+3.方法重写（override）两同两小一大原则：方法名相同，参数类型相同
+  子类返回类型小于等于父类方法返回类型
+  子类抛出异常小于等于父类方法抛出异常
+  子类访问权限大于等于父类方法访问权限
+  
+4.Spring框架是一个分层架构，由7个定义良好的模块组成：
+    核心容器，Spring上下文，SpringAOP，Spring DAO，Spring ORM，Spring Web，Spring MVC
+    
+5.AOP（Aspect Oriented Programming）面向切面编程
+    通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术，AOP是OOP的延续，是软件开发中一个热点，也是Spring框架中一个重要内容，
+    是函数式编程的一种衍生范性。Spring通过对AOP的支持，借助log4j等Apache开源组件实现了日志系统
+    
+6.考察值传递和引用传递。对于值传递，拷贝的值用完之后就会被释放，对原值没有任何影响，但是对于引用传递，拷贝的是对象的引用，和原值指向的同一块地址，
+  即操作的是同一个对象，所以操作之间会相互影响，所以对于String Str是值传递，操作之间互不影响，原值保持不变。
+  
+7.Java中的byte，short，char进行计算时都会提升为int型
+  操作数是long，计算结果还是long
+  操作数是float，计算结果float
+  操作数是double，计算结果double
+  声明为final的变量会被JVM优化
+  
+8.Statement、PreparedStatement和CallableStatement都是接口，Statement继承自wrapper、PreparedStatement继承Statement、CallableStatement。
+  Statement接口提供了执行语句和获取结果的基本方法
+  preparedStatement接口添加了处理IN参数的方法
+  CallableStatement接口添加了处理out参数的方法
+  
+  Statement：普通的不带参数的查询SQL，支持批量更新，批量删除
+  PreparedStatement：可变参数的SQL，编译一次，执行多次效率高；安全性好，有效防止sql注入等问题；支持批量更新，批量删除
+  CallableStatement：继承自PreparedStatement，支持带参数的sql操作；支持调用存储过程，提供了对输出和输入/输出参数（IN OUT）的支持
+  
+  PreparedStatement的好处：
+  1>在执行可变参数的一条SQL时，PreparedStatement比Statement的效率高，因为DBMS预编译一条Sql当然会比多次预编译一条sql的效率更高
+  2>安全性好，有效防止sql注入
+  3>对于多次重复执行的语句，使用PreparedStatement效率会更高一点，并且在这种情况下也比较适合使用batch
+  4>代码的可读性和可维护性。
+  
+  
+  
+    
+  

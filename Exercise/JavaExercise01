@@ -1,0 +1,60 @@
+
+1.流媒体技术是一种可以使音频，视频和其他多媒体信息在   Internet及 Intranet 上以实时的，无需下载等待的方式进行播放的技术。
+流媒体又叫流式媒体，它是指商家用一个视频传送服务器把节目当成数据包发出，传送到网络上。
+2.(Hashtable\HashMap\IdentityHashMap)都实现了Map接口，其中(Hashtable)与(HashMap)的区别是前者是线程安全的，后者是线程不安全的；
+(Vector)实现了List接口，是一个线程安全的List。
+
+3. 线程结束的三个原因：
+1>run方法执行完成，线程正常结束
+2>线程抛出一个未捕获的Exception或者Error
+3>直接调用该线程的Stop方法结束线程（不建议使用，容易导致死锁）
+
+4. 枚举类,所有的枚举值都是类静态常量，在初始化时会对所有的枚举值对象进行第一次初始化
+5. C语言的编译过程吧先是C语言源程序,也就是c的文件经过C编译程序编译后，生成windows可执行文件exe文件，然后在windows中执行。
+而java的编译过程先是java源程序扩展名为java的文件，由java编译程序将java字节码文件，就是class文件然后在java虚拟机中执行。
+机器码是由CPU来执行的。Java编译后是字节码， 电脑只能运行机器码。Java在运行的时候把字节码变成机器码。
+C/C++在编译的时候直接编译成机器码。
+
+6. java中把内存分成两种，一种叫做栈内存，一种叫做堆内存。
+在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配。
+当在一段代码块中定义一个变量时，java就在栈中为这个变量分配内存空间，当超过变量的作用域后，java会自动释放掉为该变量分配的内存空间，
+该内存空间可以立刻被另作他用。堆内存用于存放由new创建的对象和数组。在堆中分配的内存，由java虚拟机自动垃圾回收器来管理。
+在堆中产生了一个数组或者对象后，还可以在栈中定义一个特殊的变量，这个变量的取值等于数组或者对象在堆内存中的首地址，
+在栈中的这个特殊的变量就变成了数组或者对象的引用变量，以后就可以在程序中使用栈内存中的引用变量来访问堆中的数组或者对象，
+引用变量相当于为数组或者对象起的一个别名，或者代号。引用变量是普通变量，定义时在栈中分配内存，引用变量在程序运行到作用域外释放。
+而数组＆对象本身在堆中分配，即使程序运行到使用new产生数组和对象的语句所在地代码块之外，数组和对象本身占用的堆内存也不会被释放，
+数组和对象在没有引用变量指向它的时候（比如先前的引用变量x=null时），才变成垃圾，不能再被使用，但是仍然占着内存，
+在随后的一个不确定的时间被垃圾回收器释放掉。这个也是java比较占内存的主要原因。
+对象存储在堆内存，引用变量存储在栈内存。栈内存指向堆内存。
+
+7. public Method[] getDeclaredMethods()返回类或接口声明的所有方法，包括public, protected, default (package) 访问和private方法的Method对象，但不包括继承的方法。当然也包括它所实现接口的方法。
+public Method[] getMethods()返回某个类的所有public方法，包括其继承类的公用方法，当然也包括它所实现接口的方法。
+
+8. switch语句后的控制表达式只能是short、char、int、long整数类型和枚举类型，不能是float，double和boolean类型。String类型是java7开始支持。
+在switch（expr1）中，expr1只能是一个整数表达式或者枚举常量（更大字体），整数表达式可以是int基本类型或Integer包装类型，由于，byte,short,char都可以隐含转换为int，所以，这些类型以及这些类型的包装类型也是可以的。
+显然，long、float、double类型不符合switch的语法规定，并且不能被隐式转换成int类型，所以，它们不能作用于swtich语句中。
+
+9. Java八种基本数据类型 byte/boolean /int /long /float /char/ double /short
+然而java 还有对象数据类型，例如 String，Class等
+C中 *ponit 是指针，union 是联合体结构体一类的东西，在 C语言中存在。
+
+10. javax.servlet 包中包含了 7 个接口 ,3 个类和 2 个异常类 , 它们分别是 :
+接口 :RequestDispatcher、Servlet、ServletConfig、ServletContext、ServletRequestServletResponse 和 SingleThreadModel。
+类 :GenericServlet,ServletInputStream 和 ServletOutputStream。
+异常类 :ServletException 和 UnavailableException。
+Servlet 的生命周期：在 Servlet 的接口中定义了一个 Servlet 的生命周期方法 , 分别是 Init、Service 和 Destroy
+javax是Sun公司提供的一个扩展包，算是对原 JAVA 包的一些优化处理，现在已经有很多都是基于JAVAX的程序开发而不是java包，就像 netbeans 里的图形处理都是使用jabax包
+
+11. List 可以通过下标 (1,2..) 来取得值，值可以重复,而 Set 只能通过游标来取值，并且值是不能重复的。ArrayList ， Vector ， LinkedList 是 List 的实现类
+ArrayList 是线程不安全的， Vector 是线程安全的，这两个类底层都是由数组实现的
+LinkedList 是线程不安全的，底层是由链表实现的
+Map 是键值对集合
+HashTable 和 HashMap 是 Map 的实现类
+HashTable 是线程安全的，不能存储 null 值
+HashMap 不是线程安全的，可以存储 null 值
+
+
+
+
+
+
