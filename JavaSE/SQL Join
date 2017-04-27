@@ -1,0 +1,95 @@
+SQL是关于表引用的，JOIN是相当复杂的表引用，SQL表述与关系表述之间是有区别的，不是所有的关系连接操作也正规SQL的连接操作。
+
+连接操作主要分为五种：
+
+EQUI JOIN（等值连接）
+SEMI JOIN（半连接）
+ANTI JOIN（ANTI-SEMI JOIN）
+CROSS JOIN（交叉连接）
+DIVISION（除法连接）
+
+
+
+EQUI JOIN
+
+最常见的连接操作，它又分为：
+
+INNER JOIN (JOIN)
+OUTER JOIN (进一步分为LEFT, RIGHT, FULL JOIN)
+(注：
+  LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行
+  RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行
+  FULL JOIN: 只要其中一个表中存在匹配，就返回行）
+
+author JOIN book ON author.id = book.author_id
+author LEFT OUTER JOIN book ON author.id = book.author_id
+
+
+
+SEMI JOIN
+
+这种关系的概念在SQL中可以用的两种方式表达：IN或者EXISTS。“Semi” 在拉丁语中意味着“一半”。这种类型的连接只引用表中的“一半”。
+（注：通常出现在使用了exists或in的sql中，所谓semi-join即在两表关联时，当第二个表中存在一个或多个匹配记录时，返回第一个表的记录；与普通join的区别在于semi-join时，第一个表里的记录最多只返回一次）再考虑一下上面作者和书的连接。
+让我们想象一下，如果我们不想要作者/书籍的组合，而只想要有著书的作者的信息。那么我们可以这样写：
+
+-- 用 IN
+
+FROM author
+
+WHERE author.id IN (SELECT book.author_id FROM book)
+
+-- 用 EXISTS
+
+FROM author
+
+WHERE EXISTS (SELECT 1 FROM book WHERE book.author_id = author.id)
+尽管没有规定什么时候用IN，什么时候用EXISTS，下面的事实还是要知道的：
+
+IN比EXISTS更具可读性
+EXISTS比IN更具表现力（即更容易表达非常复杂的半连接）
+两者性能上没有显著差异（但是，也许在一些数据库中有巨大性能差异，这一点取决于具体数据库，上面的表述是一般情况）
+因为INNER JOIN也可以生成有著作的作者的信息，许多初学者可能认为，他们可以使用DISTINCT删除重复内容，他们认为他们可以表达SEMI JOIN：
+
+-- Find only those authors who also have books
+
+SELECT DISTINCT first_name, last_name
+
+FROM author
+
+JOIN book ON author.id = book.author_id
+这是非常糟糕的做法，原因有两点：
+
+性能低下，因为数据库需要将大量的数据加载到内存中，来删除重复的数据。
+
+
+ANTI JOIN
+
+这个关系的概念与SEMI JOIN恰好相反，你可以通过简单地在IN或者EXISTS前添加NOT来实现它（注：而anti-join则与semi-join相反，即当在第二张表没有发现匹配记录时，才会返回第一张表里的记录；当使用not exists/not in的时候会用到，两者在处理null值的时候会有所区别
+-- Using IN
+
+FROM author
+
+WHERE author.id NOT IN (SELECT book.author_id FROM book)
+
+-- Using EXISTSF
+
+ROM author
+
+WHERE NOT EXISTS (SELECT 1 FROM book WHERE book.author_id = author.id)
+
+
+CROSS JOIN
+
+这个结果是产生两个表的笛卡儿积，我们之前说过，也可以用逗号分隔两个表来实现。在极少数情况下，如果确实需要的话，你也可以这样明白地来写一个CROSS JOIN：
+
+-- Combine every author with every book
+
+author CROSS JOIN book
+
+
+
+DIVISION
+
+如果JOIN是乘法，DIVISION就是乘法的逆运算
+
+

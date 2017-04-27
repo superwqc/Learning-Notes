@@ -1,0 +1,12 @@
+在运行时，由java解释器自动引入，而不用import语句引入的包是()。A
+
+
+A.java.lang
+B.java.system
+C.java.io
+D.java.util
+
+java.lang包是java语言包，是自动导入的。
+java.util包是java的工具包，需要手动导入。
+java.sql包，JDBC接口类，需要手动导入。
+java.io;各种输入输入流，需要手动导入。

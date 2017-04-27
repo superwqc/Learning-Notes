@@ -1,0 +1,148 @@
+1.Volatile   
+
+volatile的作用： 作为指令关键字，确保本条指令不会因编译器的优化而省略，且要求每次直接读值.
+
+　　简单地说就是防止编译器对代码进行优化.
+    XBYTE[2]=0x55;
+    XBYTE[2]=0x56;
+    XBYTE[2]=0x57;
+    XBYTE[2]=0x58;
+    对外部硬件而言，上述四条语句分别表示不同的操作，会产生四种不同的动作，
+    但是编译器就不能像对待纯粹的程序那样对上述四条语句进行优化，只认为XBYTE[2]=0x58（即忽略前三条语句，只产生一条机器代码）。
+    如果键入 volatile，则编译器会逐一的进行编译并产生相应的机器代码（四条）.
+    
+    
+    一般说来，volatile用在如下的几个地方：
+
+　　1、中断服务程序中修改的供其它程序检测的变量需要加volatile；
+　　2、多任务环境下各任务间共享的标志应该加volatile；
+　　3、存储器映射的硬件寄存器通常也要加volatile说明，因为每次对它的读写都可能有不同意义；
+　　另外，以上这几种情况经常还要同时考虑数据的完整性（相互关联的几个标志读了一半被打断了重写），
+    在1中可以通过关中断来实现，2中可以禁止任务调度，3中则只能依靠硬件的良好设计了。
+    
+    
+    使用建议：在两个或者更多的线程访问的成员变量上使用volatile。当要访问的变量已在synchronized代码块中，或者为常量时，不必使用。
+    由于使用volatile屏蔽掉了JVM中必要的代码优化，所以在效率上比较低，因此一定在必要时才使用此关键字。  
+    
+    
+    
+ 2.Transient
+ 
+  当对象被序列化时（写入字节序列到目标文件）时，transient阻止实例中那些用此关键字声明的变量持久化；
+  当对象被反序列化时（从源文件读取字节序列进行重构），这样的实例变量值不会被持久化和恢复。
+  例如，当反序列化对象——数据流（例如，文件）可能不存在时，原因是你的对象中存在类型为java.io.InputStream的变量，序列化时这些变量引用的输入流无法被打开。
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+/**
+ *使用transient关键字不序列化某个变量
+ *注意读取的时候，读取数据的顺序一定要和存放数据的顺序保持一致
+ */
+public class TransientTest {
+    
+    public static void main(String[] args) {
+        
+        User user = new User();
+        user.setUsername("Alexia");
+        user.setPasswd("123456");
+        
+        System.out.println("read before Serializable: ");
+        System.out.println("username: " + user.getUsername());
+        System.err.println("password: " + user.getPasswd());
+        
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(
+                    new FileOutputStream("C:/user.txt"));
+            os.writeObject(user); // 将User对象写进文件
+            os.flush();
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            // 在反序列化之前改变username的值
+            User.username = "jmwang";
+            
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream(
+                    "C:/user.txt"));
+            user = (User) is.readObject(); // 从流中读取User的数据
+            is.close();
+            
+            System.out.println("\nread after Serializable: ");
+            System.out.println("username: " + user.getUsername());
+            System.err.println("password: " + user.getPasswd());
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class User implements Serializable {
+    private static final long serialVersionUID = 8294180014912103005L;  
+    
+    public static String username;
+    private transient String passwd;
+    
+    public String getUsername() {
+        return username;
+    }
+    
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public String getPasswd() {
+        return passwd;
+    }
+    
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+}
+
+运行结果为：
+
+read before Serializable: 
+username: Alexia
+password: 123456
+
+read after Serializable: 
+username: jmwang
+password: null
+  
+  
+  
+  
+  
+  
+3.Static  
+
+static可以修饰成员变量、成员方法、代码块、内部类。
+  1.static修饰成员变量，可以达到全局变量的效果（Java没有全局变量的概念），当一个类定义了static变量，其实就是申请一个内存地址，所有该类的对象共享这个静态成员变量。       
+静态变量引用方式：类名.静态变量，对象名.静态变量。
+这里区分下：静态变量和实例变量。静态变量：用static修饰，属于类，只要类被加载就会被分配内存空间；实例变量：没有static修饰，只有对象被创建了，才会分配内存空间，每一个对象的实例变量互不相关，引用方式：只能对象.实例变量。
+
+  2.static修饰成员方法，static修饰的方法是类的方法，不需要创建对象就可以调用，而非静态方法，只有对象呗创建了，才可以调用方法。
+
+静态方法不能使用this，super关键字，不能调用非static的成员变量，非static的成员方法，只能访问static修饰的成员变量，成员方法。因为没有static修饰的成员变量，成员方法，这个类的对象还没被创建，即使创建了也无法确定是哪个对象的。
+
+  3.static修饰代码块，会在类被加载的时候执行且仅会被执行一次，一般用来初始化静态变量和调用静态方法，具体见：http://blog.csdn.net/u010442302/article/details/51365857
+
+  4.static修饰内部类，这样可以不依赖与外部类实例对象而被实例化，而通常的内部类需要外部类实例化后才能实例化。静态内部类不能与外部类有相同的类名，不能访问外部类的成员变量，只能访问外部类的static成员变量和static方法（包括外部类的私有）。实例内部类格式：Outer.Inner name = new Outer.Innner();
+
+
+  Java初始化，加载顺序：父类静态成员变量，父类静态代码块，子类静态成员变量，子类静态代码块，父类非静态成员变量，父类非静态代码块，父类构造函数，子类非静态成员变量，子类非静态代码块，子类构造函数

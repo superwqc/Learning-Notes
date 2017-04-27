@@ -1,0 +1,27 @@
+
+下面哪段程序能够正确的实现了GBK编码字节流到UTF-8编码字节流的转换：
+
+byte[] src,dst;
+
+
+
+A.dst=String.fromBytes(src，"GBK").getBytes("UTF-8")
+B.dst=new String(src，"GBK").getBytes("UTF-8")
+C.dst=new String("GBK"，src).getBytes()
+D.dst=String.encode(String.decode(src，"GBK"))，"UTF-8" )
+
+选B
+
+第一步：byte[] bytes=
+      str
+    .getBytes(“gbk”)  
+            
+    告诉java虚拟机将中文以“gbk”的方式转换为字节数组。一个汉字对应两个字节。  
+
+
+      对应的第二步便是：  
+          String s=new String(bytes,“utf-8”)时，此时是将每3字节组装成一个汉字。此汉字
+      s
+    就是第一步
+      str
+    代表的汉字。

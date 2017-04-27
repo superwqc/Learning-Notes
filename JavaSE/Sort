@@ -1,0 +1,213 @@
+1.冒泡排序
+
+基本思路：用第0个元素与第1个比较，如果第0个比第1个大，那么交换它们的位置。然后第1个与第2个比较，前一个比后一个大，继续交换它们的位置，
+这样以此类推。一轮循环结束以后，最大的元素就跑到了数组的末尾。然后在这样比较数组的前n-1个元素，然第二大的元素跑到数组的倒数第二个位置……
+这样以此类推，就能比较出所有元素了。值得注意的是，如果有一轮冒泡的过程中，并没有任何元素发生位置的交换，那么此时数组已经有序了，不用继续循环了：
+
+void BubbleSort(pArrayList list)  
+{  
+    int tmp;  
+    int change = 0;  
+    //比较的轮数  
+    for(int i = 0; i < list->length-1;++i)  
+    {  
+        change = 0;  
+        //每个元素与他之后的元素比较  
+        for(int j = 0; j < list->length - i -1;++j)  
+        {  
+            //如果它比之后的元素大，交换二者的位置  
+            if(list->data[j] > list->data[j+1])  
+            {  
+                tmp = list->data[j];  
+                list->data[j] = list->data[j+1];  
+                list->data[j+1] = tmp;  
+                ++change;  
+            }  
+  
+        }  
+        //如果没有发生任何交换，那么数组已经有序了  
+        if(0 == change)  
+        {  
+            printf("第%d轮没有比较发生",i);  
+            return ;  
+        }  
+    }  
+}  
+
+
+
+2.插入排序：
+
+基本思路：从数组的第二个元素开始，依次取数组中的元素，将它与前面的的元素相比较，插入到这个元素的前面或者后面（这取决于你想从大往小排序还是从小往大排序）。
+然后再取下一个元素，跟前两个已经有序的数比较，插入到合适的位置。依次类推。下面看一下程序：
+  //插入排序  
+void insertSort(pArrayList list)  
+{  
+    int tmp;  
+    //遍历每个元素  
+    for(int i = 0; i <list->length;++i)  
+    {  
+        //找这个元素之前的元素  
+        for(int j = 0; j <= i;++j)  
+        {  
+            //如果当前元素小于之前的元素，则把当前元素插入到之前元素的位置  
+            if(list->data[j] > list->data[i])  
+            {  
+                deleteElem(list,i,&tmp);  
+                insertElem(list,j,tmp);  
+            }  
+        }  
+    }  
+}  
+
+
+3.选择排序。
+
+从0~n-1个元素中选择最小的元素，与第0个元素交换；从1~n-1个元素中选择最小的元素，与第一个元素位置交换，依次类推。
+  //选择排序  
+void selectSort(pArrayList list)  
+{  
+    int minIndex;  
+    int tmp;  
+    //起始位置不断递增  
+    for(int i = 0 ; i < list->length; ++i)  
+    {  
+        //找出从起始位置到最后一个元素的最小值，并返回它的位置  
+        minIndex = selectMiniElem(list,i);  
+        //如果二者位置不等，则交换它们  
+        if(minIndex != i)  
+        {  
+            tmp = list->data[i];  
+            list->data[i] = list->data[minIndex];  
+            list->data[minIndex] = tmp;  
+        }  
+  
+    }  
+}  
+  
+//返回i~length中最小的元素的下标  
+int selectMiniElem(pArrayList list, int index)  
+{  
+    //min初始为很大的数  
+    int min = 100000;  
+    int minIndex;  
+    for(int i = index ; i < list->length;++i)  
+    {  
+        if(list->data[i] < min)  
+        {  
+            min = list->data[i];  
+            minIndex = i;  
+        }  
+  
+    }  
+    return minIndex;  
+}      
+以上三种排序都是两重循环，复杂度为O（n^2）  
+
+
+
+
+
+
+
+4.快速排序  
+
+基本思路：从数组中挑出一个数（通常选为第一个数），总可以利用这个数把数组分为两部分：大于这个数的部分和小于这个数的部分。
+然后对于这个两部分，分别重复前面的步骤，直到每一部分都只剩下2个数为止，可以比较出来。
+一看就知道是一个递归的程序，但是程序的难点在于：如何从用一个数把数组分为两个部分呢？
+当然。你大可以用一个比较笨的办法：搞一个临时数组，然后把比较的结果放在数组里，然后把数组在赋值给我们的数组。
+通过一个临时变量，就可解决
+
+//利用第一个元素将数组分成两部分，左边部分大于第一个元素，右边部分小于  
+int part(pArrayList list, int low, int high)  
+{  
+    //临时变量，初始化为第一个元素，即分隔的那个数  
+    int val = list->data[low];  
+    while(low < high)  
+    {  
+        //从右向左走，直到遇见一个比分隔数小的数  
+        while(list->data[high] >= val && low < high)  
+            --high;  
+        //将这个数赋给第一个元素的位置，此时high位置就可以赋其他值了  
+        list->data[low] = list->data[high];  
+        //从左往右走，直到遇见一个比分隔数大的元素  
+        while( list->data[low] <= val && low < high)  
+            ++low;  
+        //将这个元素赋给前面已经被保存过的high位置  
+        list->data[high] = list->data[low];  
+    }  
+    //整个循环结束后，low=high  
+    list->data[low] = val;  
+    return high;  
+}  
+
+有了这个程序，我们的排序就很简单了：
+
+//快速排序  
+void quickSort(pArrayList list, int low, int high)  
+{  
+    int mid;  
+    if(low < high)  
+    {  
+        mid = part(list,low,high);  
+        quickSort(list,low,mid-1);  
+        quickSort(list,mid+1,high);  
+    }  
+  
+}注：如果整个数组数组是顺序排列好的或者逆序排列的，那么算法的效率就会差一些。 
+
+
+5.归并排序    
+
+归并排序与分治算法大致一样。基本思想：
+    1.“分”。将一个大数组不停的分解，直到剩下2个元素，然后对它们排序。
+    2.“治”。将两个排好序的2个元素的数组（或者是一个2个元素，一个1个元素）合并成一个有序的大数组。依次类推，递归向上。
+
+
+//归并排序  
+void mergeSort(pArrayList list, int low, int high)  
+{  
+  
+    if(high == low)  
+        return ;  
+    if(low+1 == high)  
+    {  
+        if(list->data[low] > list->data[high])  
+        {  
+            int tmp = list->data[low];  
+            list->data[low] = list->data[high];  
+            list->data[high] = tmp;  
+        }  
+        return;  
+    }  
+    int mid = (high + low) /2;  
+    mergeSort(list, low, mid);  
+    mergeSort(list, mid+1,high);  
+    merge(list, low, mid, high);  
+}  
+  
+//若list的low~mid，mid+1~high均有序，那么将它们合并起来以后依然有序  
+void merge(pArrayList list, int low, int mid, int high)  
+{  
+  
+  
+    int tmp;  
+    for(int i = low; i <= mid; ++i)  
+    {  
+        for(int j = mid+1; j <= high;++j)  
+        {  
+            if(list->data[i] > list->data[j])  
+            {  
+                //将这个元素插入到前面  
+                insertElem(list,i,list->data[j]);  
+                ++mid;  
+                //注意，当你插入一个元素以后以后，由于前面多了一个元素，所以要删除这个元素时，需要删除j+1位置  
+                ++j;  
+                deleteElem(list, j, &tmp);  
+                  
+            }  
+        }  
+  
+    }  
+}  
+算法的复杂度为：O(nlogn)。
