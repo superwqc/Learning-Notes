@@ -1,0 +1,39 @@
+JSP隐含对象是页面中的一些Java对象，JSP容器让这些Java对象可以为开发者所使用。开发者不用明确的声明就可以直接使用他们。JSP隐含对象也叫做预定义变量。
+下面列出了JSP页面中的隐含对象：
+application
+page
+request
+response
+session
+exception
+out
+config
+pageContext
+    
+Jsp请求处理：
+  浏览器首先要请求一个以.jsp扩展名结尾的页面，发起JSP请求，然后，Web服务器读取这个请求，使用JSP编译器把JSP页面转化成一个Servlet类。
+  需要注意的是，只有当第一次请求页面或者是JSP文件发生改变的时候JSP文件才会被编译，然后服务器调用servlet类，处理浏览器的请求。
+  一旦请求执行结束，servlet会把响应发送给客户端。这里看下如何在JSP中获取请求参数。
+
+JSP指令(Directive)：
+  Directive是当JSP页面被编译成Servlet的时候，JSP引擎要处理的指令。Directive用来设置页面级别的指令，从外部文件插入数据，指定自定义的标签库。Directive是定义在 <%@ 和 %>之间的。下面列出了不同类型的Directive：
+  包含指令(Include directive)：用来包含文件和合并文件内容到当前的页面。
+  页面指令(Page directive)：用来定义JSP页面中特定的属性，比如错误页面和缓冲区。
+  Taglib指令： 用来声明页面中使用的自定义的标签库。
+
+
+JSP动作：
+  JSP动作以XML语法的结构来控制Servlet引擎的行为。当JSP页面被请求的时候，JSP动作会被执行。它们可以被动态的插入到文件中，重用JavaBean组件，转发用户到其他的页面，或者是给Java插件产生HTML代码。下面列出了可用的动作：
+  jsp:include-当JSP页面被请求的时候包含一个文件。
+  jsp:useBean-找出或者是初始化Javabean。
+  jsp:setProperty-设置JavaBean的属性。
+  jsp:getProperty-获取JavaBean的属性。
+  jsp:forward-把请求转发到新的页面。
+  jsp:plugin-产生特定浏览器的代码。
+
+使用JSP的优点：
+  JSP页面是被动态编译成Servlet的，因此，开发者可以很容易的更新展现代码。
+  JSP页面可以被预编译。
+  JSP页面可以很容易的和静态模板结合，包括：HTML或者XML，也可以很容易的和产生动态内容的代码结合起来。
+  开发者可以提供让页面设计者以类XML格式来访问的自定义的JSP标签库。
+  开发者可以在组件层做逻辑上的改变，而不需要编辑单独使用了应用层逻辑的页面。

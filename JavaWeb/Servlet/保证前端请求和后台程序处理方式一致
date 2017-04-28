@@ -1,0 +1,34 @@
+1.前端页面的发送请求应当和服务器需要的请求方式一致
+  -服务器需要前端发送POST请求，若发送GET请求，服务器应当提示错误信息。
+  -服务器需要前端发送GET请求，若发送POST请求，服务器应当提示错误信息。
+  
+  
+2.如何完成以上需求？
+  -在Javaweb程序中想办法获取该请求是什么类型的
+  -当获取到请求方式之后，在javaweb程序中可以使用Java中的if进行判断
+      if("POST".equals(method)){
+      }else if("GET".equals(method)){
+      }
+      
+      
+ 3.怎么在javaweb程序中获取请求方式？
+  -HTTP的请求协议全部信息将自动被封装到javax.servlet.http.HttpServletRequest对象中
+  -HttpServletRequest接口中有一个方法叫做：String getMethod()可以获取请求方式
+  -public interface javax.servlet.http.HttpServletRequest extends ServletRequest{
+  }
+  
+  
+ 4.在每一个Servlet类中，都编写以下程序，来保证前端的请求方式和后台需要的请求方式一样
+    HttpServletRequest  request =(HttpServletRequest)req;
+    HttpServletResponse  response =(HttpServletResponse)res;
+    response.setContentType("text/html;charset="UTF-8");
+    PrintWriter out =response.getWriter();
+    String method =request.getMethod();
+    if("GET".equals(method)){
+       out.print("405,应当发送POST请求");
+       throw new RuntimeException("405,应当发送GET请求")；
+    }
+    out.print("登录。。");
+    
+    
+ 5.以上代码在每一个Servlet对象中都需要写

@@ -1,0 +1,68 @@
+Cookie
+
+    1.Cookie是什么？作用？
+      “曲奇饼干”   
+      保存会话状态，但是这个会话状态保留在客户端上。
+      只要cookie清除，或者cookie失效，这个会话状态就没有了。
+      cookie是保存在浏览器客户端上
+      cookie可以保存在浏览器的缓存中，浏览器关闭cookie消失
+      cookie也可以保存在客户端的磁盘文件中，浏览器关闭cookie还在，除非cookie的失效
+      
+    2.只要是web开发，只要是B/S架构的系统，只要是基于HTTP协议，就有cookie的存在
+      cookie机制就是http协议规定的
+     
+    3.cookie实现的常见功能有哪些？
+      -保留购物车商品的状态在客户端上
+      -十天内免登录
+      。。。
+      
+    4.在Java中cookie被当做类来处理，处理new运算符可以创建cookie对象，而且cookie由两部分组成
+      cookie的name和value，两者都是String字符串类型
+      
+    5.Java程序中怎么创建cookie?
+        Cookie cookie =new Cookie(String cookieName,String cookieValue);
+    
+    6.服务器可以一次向浏览器发送多个cookie
+    
+    7.默认情况下，服务器发送cookie给浏览器之后，浏览器将cookie保存在缓存当中，只要不关闭浏览器，cookie永远存在，并且有效。
+      当浏览器关闭之后，缓存中的cookie被清除。
+      
+    8.在浏览器客户端无论是硬盘文件中还是缓存中保存的cookie，什么时候会再次发送给服务器？
+        -浏览器会不会提交发送这些cookie给服务器，和请求路径有关系
+        -请求路径和cookie是紧密关联的。
+        -不同的请求路径会发送提交不同的cookie
+        
+    9.默认情况下cookie会和哪些路径绑定在一起?
+        /servlet/test/createAndSendCookieToBrowser   请求服务器，服务器生成cookie，并将cookie发送到浏览器客户端
+        这个浏览器中cookie会默认和“test/”绑定在一个这个路径
+        也就是说，以后只要发送“test/”请求，cookie一定会提交给服务器。
+        
+    10.其实路径是可以指定的，可以通过Java程序进行设定。保证cookie发送给浏览器客户端。
+       这个关闭浏览器cookie消失，我们可以通过设置cookie的有效时长，以保证cookie保存在硬盘文件中。
+       但是这个有效时长必须是>0。换句话说，只要设置cookie的有效时长大于0，则该cookie会保存在客户端硬盘文件当中，有效时长过后，则硬盘文件当中cookie失效。
+        
+        
+    11.默认情况下，没有设置cookie有效时长，该cookie被默认保存在浏览器的缓存当中，只要浏览器不关闭cookie存在，必须是大于0的，
+    换句话说，只要设置cookie的有效时长大于0，则该cookie会被保存在客户端硬盘文件中，有效时长过去之后，则硬盘中的cookie失效
+              cookie有效时长=0  直接被删除
+              cookie有效时长<0  不会被存储
+              cookie有效时长>0  存储在硬盘文件中
+              
+              cookie.setMaxAge(60*60)   一个小时有效
+    
+    12.浏览器提交cookie给服务器，服务器怎么接收？
+        Cookie cookie =request.getCookies();
+        
+        if(cookies !=null ){
+            for(Cookies cookie:cookies){
+                String cookieName=cookie.getName();
+                String cookieValue =cookie.getValue();
+                System.out.println(cookieName+"="+cookieValue);
+               }
+             }
+    
+    13.浏览器可以禁用cookie
+        -代表服务器发送来的cookie，浏览器不接收
+        -服务器仍然会发送，只是浏览器不接收
+      
+      

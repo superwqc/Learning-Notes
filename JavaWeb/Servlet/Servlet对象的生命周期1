@@ -1,0 +1,36 @@
+
+	1.什么是生命周期
+	一个Java对象从最初被创建，到最后被销毁，所经历里的过程
+
+	2.servlet对象从最初的创建，方法的调用，以及对象的销毁，都是由web容器（Web Container）管理的，程序员无权干涉。
+
+	3.默认情况下，servlet对象在web服务器启动阶段中不会被实例化，若需要启动时实例化，则需要特殊的设置
+
+	4.概述servlet对象生命周期
+		1）用户在浏览器地址栏输入URL
+		2）web容器截取请求路径
+		3）web容器在容器上下文中招请求路径
+			1>通过web.xml文件中的相关配置信息找到请求路径
+			2>通过反射机制，调用servlet的无参构造方法完成servlet对象的实例化
+			3>web容器调用servlet的init()方法完成初始化操作
+			4>web容器调用servlet的service()方法提供服务
+		5)若找到对应的servlet对象
+			1>web容器直接调用servlet的service()方法提供服务
+		6）web容器关闭的时候、webapp重新部署的时候、该servlet对象长时间无用户再次访问时，web容器会将该servlet对象销毁。
+		   销毁值前，web容器会调用servlet的destroy（）方法，完成销毁之前的准备。
+			
+	5.总结
+		1.servlet类的构造方法只执行一次
+		2.servlet对象的init（）只执行一次
+		3.servlet对象的service（）方法用户调用一次，执行一次
+		4.2.servlet对象的destroy（）只执行一次
+
+	6.注意
+		init方法执行的时候，servlet对象已经被创建好了
+		destroy方法执行的时候，servlet对象还没有被销毁，即将被销毁
+
+	7.servlet对象是单例，但是不符合单例模式。只能成为伪单例。真单例的构造方法是私有化的，Tomcat服务器是支持1多线程的
+	所以servlet对象在单实例多线程的环境下运行。
+	那么servlet对象中若有实例变量，并且实例变量涉及到修改操作，那么这个servlet对象一定存在线程安全问题，不建议在servlet对象中使用实例变量。尽量使用局部变量
+
+	

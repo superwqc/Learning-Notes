@@ -1,0 +1,49 @@
+1.Servlet对象实例化之后，被存放在哪里？
+   大多数web容器都是将Servlet对象以及对应的URL-pattern存放在Map集合中
+        在web容器中有一个Map集合
+        Map<String,Servlet>集合
+        key                            value
+        ------------------------------------
+        /login                         LoginServlet对象引用
+        /delete                        DeleteServlet对象引用
+        /save                          SaveServlet对象引用
+        
+        
+2.服务器在启动的时候就会解析各个webapp的wed.xml文件，做了什么？
+    将web.xml文件中的url-pattern相对应地Servlet完整类名存到Map集合中。
+    在web容器中有一个Map集合
+    Map<String,Servlet>集合
+         key                            value
+        ----------------------------------------------
+        /login                        javaweb.servlet.LoginServlet
+        /delete                        javaweb.servlet.DeleteServlet
+
+
+3.Servlet接口中的方法什么时候用？
+     1)无参构造方法（以后不要再考虑构造函数了）
+     2）init（）方法
+     以上两个方法执行时间几乎是相同的，执行次数都是一次。构造方法执行时对象正在创建，init方法执行的时候，对象已经被创建好了。
+     若系统要求在对象创建时刻执行一段特殊程序，这段程序尽量写到init方法中。
+     为什么不建议写到构造方法中？
+         存在风险
+         当程序员编写构造函数时，可能会导致无参构造方法不存在
+         一个类不编写任何构造函数，默认有一个无参构造。但是一旦编写一个有参数的构造函数，系统则不再提供无参构造函数。
+         
+     
+     Servlet中的init方法是SUN公司为Javaweb程序员提供的一个初始化时刻。若希望在初始化时刻编写一段特殊程序。则可以编写到init方法中。
+     
+     
+4.service方法
+   这个方法是必然要重写的。因为这个方法要完成哑无逻辑的处理，请求的处理，以及完成的响应。
+   而且这个方法中的代码（业务代码）是最有价值的，也是最难写的。
+   
+   
+5.destroy方法
+   这个方法是SUN公司为Javaweb程序员提供的一个特殊时刻。这个时刻就是对象的销毁时刻
+   若希望在对象销毁时刻编写一段特殊程序。则可以编写到destroy方法中，自动被容器调用。
+   
+   
+6.回顾：
+   类加载时刻执行程序，代码写在静态代码块中。
+   
+     

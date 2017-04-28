@@ -1,0 +1,84 @@
+web中的session
+   1.Session表示会话，不只存在于javaweb，只要是web开发，都会有这种机制
+   2.Java中：javax.servlet.http.HttpSession，简称Session/会话
+   3.Cookie可以将会话状态保存在客户端，httpSession可以将会话状态保存到服务器端
+   4.HttpSession对象是一个会话级别的对象，一次会话对应一个HttpSession对象。
+   5.什么是一次会话？
+     “目前”可以是这样理解：用户打开浏览器，在浏览器上发送到多次请求，直到最终关闭浏览器，表示一次完整的会话。
+   6.在会话进行过程中，web服务器一直为当前这个用户维护着一个会话对象/HttpSession
+   7.web容器中，web容器维护了大量的HttpSession对象，换句话说，web容器中应该有一个“Session列表”
+   
+   
+   Session的实现原理?
+      -打开浏览器，在浏览器上发送首次请求
+      -服务器会创建一个HttpSession对象，该对象代表一次会话
+      -同时生成HttpSession对象对应的Cookie对象，并且cookie对象的name是JESSIONID,cookie的value是32位长度的字符串。
+      -服务器Cookie的value和HttpSession对象绑定到列表中
+      -服务器将Cookie完整的发送到浏览器客户端
+      -浏览器客户端将cookie保存到缓存中
+      -只要浏览器不关闭，cookie不会消失
+      -当再次提交请求时，会自动提交缓存当中的Cookie
+      -服务器接收到cookie，验证该Cookie的name确实是JESSIONID，然后获取该cookie的value
+      -通过Cookie的value去Session列表中检索对应的HttpSession对象
+   
+   8.和HttpSession对象相关联的cookie的name是比较特殊的，在Java中叫做：jsessionid
+   
+   9.浏览器禁用Cookie会出现什么问题？怎么解决
+      -浏览器禁用cookie，则浏览器缓存中不再保存cookie
+      -导致在同一个会话中，无法获取到对应的绘画对象
+      -禁用cookie后，每一次获取的会话对象都是新的
+      
+      浏览器禁用cookie后，若还想拿到对应的Session随想，必须使用url重写机制
+      重写url会给编程带来难度，所以一般不建议重写，建议开启Cookie
+         
+   10.浏览器关闭之后，服务器端对应的Session对象会被销毁吗？
+      -不会被销毁
+      -因为B/S架构的系统是基于http协议，而http协议是一种无连接/无状态的协议
+      -什么是无连接/无状态？
+            *请求的瞬间浏览器和服务器之间的通道是打开的，请求响应结束后通道关闭
+            *这样做的目的是降低服务器压力
+      
+   11.Session对象什么时候被销毁？
+        -web系统中引入了Session超时的概念
+        当很长一段时间（这个时间可以配置）没有用户再访问该Session对象，此时Session对象超时，web服务器自动回收Session对象
+        
+        <session-config>
+        <session-timeout>120</session-timeout>
+        </session-config>
+      
+   12.到底什么是一次会话？
+      *一般情况下，用户打开浏览器进行一些操作，然后将浏览器关闭，表示一次会话结束
+      *本质上的描述：从Session对象的创建，到最终Session对象超时被销毁，这才是真正意义上的一次完整会话
+      
+   13.HttpSession接口中的常用方法
+      -void setAttribute（String name，Object value）
+      -Object getAttribute（String name）
+      -void removeAttribute（String name）
+      -void invalidate（）：销毁session对象
+      
+   14.ServletContext、HttpSession、HttpServletRequest接口对比：
+      1.以上都是范围对象
+         ServletContext application是应用范围
+         HttpSession session是会话范围
+         HttpServletRequest request是请求范围
+         
+      2.范围排序
+         application>session>request
+         
+      3.application完成跨会话共享数据
+        session完成跨请求共享数据，但是这些请求必须在同一个会话中
+        request完成跨Servlet共享数据，但是这些Servlet必须在同一个请求中【转发】
+        
+      4.使用原则：由小到大尝试 
+        例如：登陆成功后，已经登录的状态需要保存起来。可以将登录成功的这个状态保存到session对象中。
+        登录成功状态不能保存到request范围中，因为一次请求对应一个新的request对象
+        登陆成功状态也不能保存到application范围中，因为登陆成功状态是属于会话级别的，不能所有用户共享
+        
+   15.补充HttpServletRequest中的方法
+      -HttpSession session =request.getSession();获取当前session，获取不到，则新建session
+      -HttpSession session =request.getSession(true);获取当前session，获取不到，则新建session
+      -HttpSession session =request.getSession(false);获取当前的session，获取不到，则返回null
+      
+      
+        
+         

@@ -1,0 +1,58 @@
+java.servlet.ServletConfig:
+
+
+  1.Apache Tomcat服务器是一个容器，实现了Servlet规范和JSP规范，Tomcat服务器专门写了一个ServletConfig接口的实现类。
+  实现类的完整类名：org.apache.catalina.core.StandardWrapperFacade
+  
+  2.javaweb程序员一直是面向Servletconfig接口完成调用，不需要具体的实现类。
+  webAPP放到Tomcat服务器中，Servletconfig实现类是：org.apache.catalina.core.StandardWrapperFacade 
+  webapp放到JBOSS服务器中，Servletconfig实现类是另一个类名了。
+  这些所有的实现类，都不需要关心，只需关心Servletconfi中有哪些可用的方法。
+  
+  3.Servletconfig接口中常用方法：
+      String getServletName()：获取Servlet name
+      String getInitParameter(String name) ：通过初始化参数的name获取value
+      Enumeration<String> getInitParameterNames()  ：获取所有初始化参数的name
+      ServletContext getServletContext() ：获取Servlet上下文对象
+      
+  4.Servletconfi到底是什么？
+  -Servletconfig是一个Servlet对象的配置信息。Servletconfig对象中封装了一个Servlet对象的配置信息。
+  Servlet对象的配置到web.xml文件中。
+  -一个Servlet对象对应一个Servletconfig对象。
+      
+  5.将init方法的Servletconfig参数移动到service方法中，因为主要编写的是service方法。
+  实现getServletConfig方法，提供公开的get方法是供其子类使用  
+
+
+
+java.servlet.ServletContext接口：
+  
+  1.实现类的完整类名：org.apache.catalina.core.ApplicationContextFacade
+  
+  
+  2.ServletContext被称为“servlet上下文”
+   -一个webapp只有一个人web.xml文件，web.xml文件服务器启动阶段被解析
+   -一个webapp只有一个ServletContext对象，ServletContext在服务器启动阶段被实例化。
+   -ServletContext在服务器关闭时候会被销毁。
+   -ServletContext对应的是web.xml文件，是web.xml文件的代表。
+   -ServletContext是所有Servlet对象四周环境的代表，在一个webapp，所有Servlet对象共享同一个“四周环境对象”，该对象就是ServletContext
+   -所有的用户若想共享一个数据，可以将这个数据放到ServletContext中。
+   -一般放在ServletContext对象中的数据是不涉及到修改操作的，因为ServletContext是多线程共享的一个对象，修改的时候会存在线程安全问题
+  
+  3.ServletContext接口中的常用方法：
+      -Object  getAttribute（String name）：从ServletContext范围中获取数据（Object value=map.get(key)）
+      -String  getInitParameterNames()：返回包含指定上下文范围初始化参数值的 String，如果参数不存在，则返回 null
+      -Enumeration  getInitParameterNames()：以 String 对象的 Enumeration 的形式返回上下文初始化参数的名称，如果该上下文没有初始化参数，则返回一个空的 Enumeration。 
+      -String  getRealPath()：为给定虚拟路径返回包含实际路径的 String。
+        例如，可以通过对 "http://host/contextPath/index.html" 的请求使路径 "/index.html" 返回服务器文件系统上的绝对文件路径，
+        其中 contextPath 是此 ServletContext 的上下文路径
+      -void removeAtrribute(String name)：移除ServletContext范围中的数据（map.remove(key)）
+      -void setAtrribute（String name，Object object）：向ServletContext范围中添加数据(map.put(key,value))
+  
+  
+  4.Servlet、ServletConfig、ServletContext的关系
+  -一个Servlet对应一个Servletconfig。所有的Servlet共享一个ServletContext对象
+  
+  
+  5.ServletContext范围可以完成跨用户传递数据。
+      
