@@ -1,0 +1,6 @@
+where与having的区别
+    1.Where 是对行过滤，也就是说，where会一行一行地对表进行过滤;
+	    Having是对组过滤，也就是说，having会一组一组地对整组过滤
+    2.Where后面不能跟聚合函数，Having后面可以跟聚合函数
+        因为聚合函数，本来就是要把多行值变为1行
+    3.Where必须直接跟在表名之后，having跟在group by子句之后!
