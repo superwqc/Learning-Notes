@@ -1,0 +1,79 @@
+1.表名和列名的命名规则
+    必须以字母开头
+    长度不能超过30个字符
+    不能使用oracle的关键字
+    只能使用如下字符A-Z，a-z，0-9，$，#，_
+
+2.创建表
+    create table 表名
+    (
+    列名 类型,
+    列名 类型,
+    列名 类型,
+    ...
+    列名 类型
+    );
+
+3.删除表
+    drop table 表名
+    
+4.oracle支持的数据类型
+  1.字符型
+     1.char		
+         定长	最大2000个字节
+         对于char(10)类型，存放“张三”的情况是这样的：前四个字节存放“张三”，后补6个空格
+         char的优点： 存取效率高， 缺点：浪费空间
+     2.varchar2		
+         变长	最大4000个字节
+         对于varchar2(10)类型，存放"张三"的情况是这样的：只占4个字节
+         Varchar2的优点： 节省空间， 缺点是：效率比char要低
+     3.比如，
+         存储地址时，varchar2(100)
+         存储手机号，char(11)
+     4.clob(character large object)	字符大对象	最大4G
+         8bit = 1byte
+         1024byte = 1kb
+         1024kb = 1mb
+         1024m = 1g   1024g=1t
+   2.数字型
+      1.number		
+         取值范围：-10的38次方到10的38次方
+         可以表示整数和小数
+      2.number(M,N)
+         表示一共占M列，其中小数占N列，整数剩M-N列
+         如果小数超出精度，则四舍五入
+         如果整数超过范围，则报错
+      3.number(M)
+         表示一个M位整数
+         只能存放整数，如果整数超出范围就报错，如果有小数部分也报错!
+         M的最大值是38
+         
+5.增删改查
+    修改表的名字
+        rename 表名 to 新表名
+    添加一个字段
+        alter table 表名 add 列名 类型
+    修改字段的类型
+        alter table 表名 modify 旧列名 新类型
+    修改字段的名字
+        alter table 表名 rename column 旧列名 to 新类名
+    删除一个字段
+        alter table 表名 drop column 列名
+    查询
+        select 字段名 from 表名
+        select * from 表名
+        select * from 表名 where 条件
+    添加数据
+        insert into 表名 values(所有字段的值列表);
+        insert into 表名(字段列表) values(对应字段的值列表)
+        添加空值：在值列表中写null即可,注意null表示“不知道”
+    修改数据
+        update 表名 set 字段名=值       
+        update 表名 set 字段名=值，字段名=值，字段名=值...
+        update 表名 set 字段名=值 where 条件
+
+    
+
+
+
+    
