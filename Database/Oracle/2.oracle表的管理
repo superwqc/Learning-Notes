@@ -71,6 +71,14 @@
         update 表名 set 字段名=值       
         update 表名 set 字段名=值，字段名=值，字段名=值...
         update 表名 set 字段名=值 where 条件
+    删除数据
+        delete from 表名
+        delete from表名 where 条件
+
+    截断表,删除大量数据时，比delete的速度快
+        truncate table 表名
+        注意truncate table 无法添加where
+  
 
     
 
