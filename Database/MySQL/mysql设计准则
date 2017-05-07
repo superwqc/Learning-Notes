@@ -1,0 +1,210 @@
+SQL是Structured Query Language(结构化查询语言)的缩写。SQL是专为数据库而建立的操作命令集，是一种功能齐全的数据库语言。
+ 
+ DML（ Data Manipulation Language数据操作语言）  简记为“增、删、改、查”
+——查询、插入、删除和修改数据库中的数据；
+——SELECT、INSERT、 UPDATE 、DELETE等；
+
+一个SQL语句，使用分号（;）结尾
+取消SQL语句使用（\c）
+NULL 是一种无类型的值，表示“空，什么也没有”
+
+
+char和varchar类型
+char类型和varchar类型长度范围都是0~255之间的大小。他们之间的差别在于MySQL处理存储的方式：
+char把这个大小视为值的准确大小（用空格填补比较短的值）。
+varchar类型把它视为最大值并且只使用了存储字符串实际上需要的字节数（增加了一个额外的字节记录长度）。
+因而，较短的值当被插入一个语句为varchar类型的字段时，将不会用空格填补（然而，较长的值仍然被截短 ）。
+
+
+建立数据库操作：	
+create  database  数据库名
+创建一个具有指定名称的数据库。如果要创建的数据库已经存在，或者没有创建它的适当权限，则此语句失败。
+
+建立表操作：
+语法：create table 表名（
+列名1  列类型  [<列的完整性约束>],
+列名2  列类型  [<列的完整性约束>], 
+ );
+ 如：
+ create table school(
+  school_id  int not null auto_increment primary key,
+  school_name varchar(20) 				
+  )；
+  
+  
+-PRIMARY  KEY 	   主码约束(主键)
+-UNIQUE						唯一性约束
+-NOT  NULL				非空值约束			
+-AUTO_INCREMENT	用于整数列默认自增1
+-UNSIGNED    无符号整数
+-DEFAULT default_value		默认值约束
+-DEFAULT cur_timestamp 创建新记录时默认保存当前时间（仅适用timestamp数据列）
+-ON UPDATE cur_timestamp 修改记录时默认保存当前时间（仅适用timestamp数据列）
+-CHARACTER SET name 指定字符集（仅适用字符串）
+
+
+主键与外键
+数据表之间的关联/引用关系是依靠具体的主键（primary key）和外键（foreign key）建立起来的。
+主键：帮助MySQL以最快的速度把一条特点的数据记录的位置确定下来。
+主键必须是唯一的
+主键应该是紧凑的，因此整数类型比较适合
+外键：引用另外一个数据表的某条记录。
+外键列类型尽可能与主键列类型保持一致
+外键列应该加上NOT NULL
+例：
+主键
+create table student(
+	sid int not null auto_increment,
+	name varchar(20) not null,
+	primary key(sid)
+);
+
+外键（自动检查外键是否匹配）
+create table score(
+	cid int not null auto_increment primary key,
+	score int,
+	sid int,
+	foreign key(sid) references student(sid)
+);
+
+
+1、当主表中没有对应的记录时，不能将记录添加到子表
+2、不能更改主表中的值而导致子表中的记录孤立
+3、子表存在与主表对应的记录，不能从主表中删除该行
+4、删除主表前，先删子表
+
+
+增加、修改
+向people表中添加字段address2,类型为varchar,最大长度为100
+alter table people add address2 varchar(100);
+例2:	
+将people表中的name列默认值改为100:
+alter table people alter name set default 100;
+例3:
+向student表增加“入学时间”列，其数据类型为日期型。
+alter table student add scome date；
+
+注：无论基本表中原来是否已有数据，新增加的列一律为空值。
+例4:
+将年龄的数据类型改为半字长整数。
+alter table student modify sage smallint； 
+注：修改原有的列定义有可能会破坏已有数据
+
+
+插入记录操作
+INSERT  [INTO] <表名> [列名] VALUES <值列表>
+向people表中添加一条记录：
+insert into people(name,age) values(“zhangsan”,20);
+
+
+查询
+SELECT    <列名> 
+FROM      <表名> 
+[WHERE    <查询条件表达式>] 
+[ORDER BY <排序的列名>
+	
+
+
+
+第一范式
+create table person(
+    id varchar(18) primary key,
+    name varchar(20) not null,
+    info varchar(200)
+);
+
+insert into person(id,name,info)
+ values("321645987945645","张三","出生日期：1980-1-1 家庭住址：中国陕西西安雁塔区电子称西部电子社区");
+
+第一范式要求每一个字段都不可再分割，并且有意义
+person表中info字段可以分割为以下信息
+生日、国籍、籍贯、城市、区域、详细地址
+
+create table person(
+    id varchar(18) primary key,
+    name varchar(20) not null,
+    birthday date,
+    guoji varchar(20),
+    jiguan varchar(20),
+    city varchar(20),
+    area varchar(20),
+    address varchar(50)
+);
+
+第二范式
+第一范式要求非常简单，但是如果所有情况都按第一范式设计就会有很多问题，例如：有一个学生成绩表，包含学号、姓名、课程、成绩
+create table student(
+   id int primary key,
+   name varchar(20),
+   course varchar(20),
+   grade int
+)
+
+insert into student(id,name,course,grade) values(1001,"张三","Java",80);
+insert into student(id,name,course,grade) values(1002,"张四","Java",80);
+insert into student(id,name,course,grade) values(1003,"张五","C",80);
+insert into student(id,name,course,grade) values(1004,"张六","c++",80);
+以上表的设计会造成以下问题：
+课程信息重复，一般会课程设置编号，但是编号在这里会重复出现
+如果有一个课程没有学生选修，这个课程的信息就不存在了
+修改课程信息时需要修改多条数据
+
+使用第二范式修改如下：
+学生表应该作为一个实体表
+create table student(
+   id int primary key,
+   name varchar(20)
+)
+课程表作为一个实体表
+create table course(
+   id int primary key,
+   name varchar(20)
+)
+选课表用来描述学生实体与课程实体之间的关系
+create table sc(
+   sid int,
+   cid int,
+   grade int
+)
+这里其实是一个多对多的关系，一个学生可以选择多门课程，一个课程可以被多个学生选修
+课程信息不会重复，课程编号也是唯一的
+即使没有学生选择的课程信息也不会丢失
+修改课程信息时只需要修改一条信息即可
+
+第三范式
+实际我使用第三范式最多，例如：学生表包含信息学号、姓名、所在学校、学校地址、学校电话
+
+create table student(
+	id int,
+	name varchar(20)
+)
+
+create table school(
+    id int,
+    name varchar(20),
+    address varchar(30),
+    tel varchar(50)
+)
+
+create table ss(
+   sid int,
+   scid int
+)
+这时一个学生可以在多个学校上学，一个学校有多个学生
+
+第三范式描述的是一个一对多的关系
+create table student(
+	id int,
+	name varchar(20),
+	scid int
+)
+
+create table school(
+    id int,
+    name varchar(20),
+    address varchar(30),
+    tel varchar(50)
+)
+
+真实开发时不会严格按照设计范式设计数据库，
+我们设计数据库时的原值是关系越简单越好，sql越简单越好
