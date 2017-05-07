@@ -1,0 +1,39 @@
+1.oracle的同一个数据库，可以有不同的用户登录，不同的用户登录的同一个oracle数据库中，看到的数据对象是不一样的！
+
+2.oracle连接命令：
+	conn[ect]，切换用户
+		用法：conn 用户名/密码@网络服务名 [as sysdba/sysoper]
+		当用特权用户身份连接时，必须带上 as sysdba 或是 as sysoper
+
+
+	disc[onnect]，断开与当前数据库的连接
+	passw[ord]，修改用户的密码.
+	show user，显示当前用户
+	exit，断开与数据库的连接，同时退出sql*plus
+
+3.文件操作命令：
+	start和@，运行sql脚本
+		案例：sql>@ d:\a.sql	sql>start d:\a.sql
+	edit，该命令可以编辑指定的sql脚本
+		案例：sql>edit d:\a.sql
+	Ed
+		Ed会打开一个文本文件!
+		该文本文件总是存放，上一次刚刚执行完毕的sql语句!
+		如果直接键入 “/” 则，总是会执行ed对应的文本文件中存放的那个sql语句!
+		我们能在打开ed对应的文本以后，自己修改该文本中的内容
+		在自己修改过ed中的sql语句以后，在键入/ 就是执行自己修改过以后的sql语句了!
+	Save
+		用于把目前,ed对应的文本中的sql语句，存盘!
+4.创建用户：
+	创建账户，必须有管理员来创建
+	create user 账户名 identified by 密码
+	Oracle中的任何一个账户创建好以后，默认情况下，没有任何权限！
+	不能登录
+	不能创建表
+	不能CRUD
+
+	赋予用户权限的语句
+		grant 权限  to 用户
+		grant create session to 用户  就是把登录权限给用户 
+	撤销权限
+		revoke 权限 from 用户
