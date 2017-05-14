@@ -1,0 +1,217 @@
+#################虚拟机控制##############
+[kiosk@foundation0 Desktop]$ rht-vmctl start desktop		###开启desktop虚拟机
+Error: desktop not started (is already running)			###报错，desktop已经运行
+[kiosk@foundation0 Desktop]$ rht-vmctl view  desktop		###显示desktop
+[kiosk@foundation0 Desktop]$ rht-vmctl poweroff desktop 	###关闭dekstop
+Powering off desktop..			
+[kiosk@foundation0 Desktop]$ rht-vmctl start desktop 		###开启desktop
+Starting desktop.
+[kiosk@foundation0 Desktop]$ rht-vmctl view desktop 
+[kiosk@foundation0 Desktop]$ rht-vmctl poweroff desktop 
+Powering off desktop..
+[kiosk@foundation0 Desktop]$ rht-vmctl view desktop 
+Error: unable to view desktop - not currently running.		###虚拟机没开启无法显示
+[kiosk@foundation0 Desktop]$ rht-vmctl reset desktop 		###当虚拟机出现故障，reset表示重置
+Are you sure you want to reset desktop? (y/n) y			###询问是否重置y表示yes
+Resetting desktop.						##正在重置
+Powering off desktop..
+
+
+#########进入系统##################
+*）普通用户登陆
+student 普通用户，密码student
+
+*）超级用户登陆
+->not listed 		点击未列出
+username		提示输入用户名称
+->root			root为系统超级用户
+passwd			提示输入密码
+->redhat		redhat是超级用户密码	
+
+###语言调整#####
+Applications    ----->system tools---->settings ----->Region & language --->language 
+
+打开命令行---> reboot
+
+
+
+
+######################
+#####   第一单元 #####
+######################
+
+###1.行提示符######
+[kiosk@foundation0 Desktop]$
+kiosk			##打开shell的用户
+@			##分隔符
+foundation0		##主机名称
+Desktop			##工作目录名称
+$			##身份提示符，#表示超级用户，$表示普通用户
+
+注意：命令要在行提示符之后输入才能执行
+
+####2.切换用户#######
+[kiosk@foundation0 Desktop]$ su - username
+*)高级用户切换到低级用户不需要密码，低级用户切换到高级或者平级用户的切换需要密码
+
+####3.虚拟控制台#####
+Ctrl+Alt+F(1|7)	进入图形
+Ctrl+Alt+F(2~6) 进入虚拟控制台
+
+Red hat Enterprise Linux Server 7.0 (Maipo)	##系统版本
+Kernel 3.10.0-123.el7.x86_64 on an x86_64	##内核版本，系统位数
+
+desktop0 login：root				##登陆用户名称输入
+Password：					##密码输入无回显
+
+
+###4.命令的执行####
+1.命令必须在行提示符之后输入
+2.命令格式
+命令 参数 目标
+3.ctrl +c	##撤销命名的执行
+4.命令参数
+-参数	##单词缩写
+--参数	##单词的全拼
+
+
+#######5.命令的帮助###
+1.
+whatis 命令	##查看命令的功能
+命令 --help	##查看命令的帮助
+[]		##选择加入的内容，可加可不加
+...		##加入的内容个数任意
+<>		##内容在命令执行过程当中必须要加
+
+
+
+
+
+#####6.系统的使用基础方法######
+1)系统登陆
+图形登陆方式
+文本登陆方式
+gnome-session-quit --force	###注销用户 --force强制注销，不询问
+
+2)工作界面转换
+ctrl+alt+上|下
+
+3)开始bash
+1.Applications>Utilities>Terminal
+2.鼠标右键----->open in terminal
+3.gnome-terminal
+4.ctrl+shift+n		##在新窗口中打开shell
+  ctrl+shift+t		##同一个窗口中打开新的tab
+5.退出：exit | ctrl+d
+
+
+4)系统关机，重启
+重启
+reboot | init 6 |shutdown -r now
+关机
+poweroff | init 0 | shutdown -h now
+
+5)锁屏
+ctrl + alt +L		##在rhel7.0
+win键 + L		##在rhel7.2
+
+###简单的系统命令
+1） date
+watch -n 1 date 	###让date命令每秒执行一次，ctrl +c 推出监控模式
+
+date 11181115		###把系统时间设定为11月18日11：15 格式：月月天天小时分钟
+date 111811152016.55	##2016表示年（可以不加）.55 表示秒（可以不加）
+
+-d +xday -xday		##查看x天前或者后的时间
++%....			##设定date的输出格式
+
+
+2）passwd
+1.passwd 修改用户密码
+[root@foundation0 ~]# passwd
+
+Changing password for user root.	##改变超级用户密码
+New password: 				##输入密码
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 			##确认密码
+passwd: all authentication tokens updated successfully.
+
+
+[kiosk@foundation0 Desktop]$ passwd
+Changing password for user kiosk.	##改变普通用户密码
+Changing password for kiosk.	
+(current) UNIX password: 		##输入当前密码
+New password: 	
+BAD PASSWORD: The password is the same as the old one		##和原始密码不能相似
+New password: 
+BAD PASSWORD: The password fails the dictionary check - it is too simplistic/systematic ##密码必须是无序数字+字母
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters	##密码必须>8位
+
+passwd	参数	用户名称
+	-S	student		##用户密码信息
+	--status student		。。。。。。
+	-l	student		##锁定帐号
+	-u	student		##解锁
+	-n 1	student		##设定密码最短有效期
+	-x 30	student		##设定密码最长有效期
+	-w 3	student		##警告期
+	-i 2	student		##设定用户非活跃天数
+	-d	student		##清除用户密码
+监控passwd密码信息
+watch -n 1 passwd -S student
+
+
+3）file
+file 文件名字	##查看文件类型
+
+4）文件的查看
+cat		filename	##显示文件的全部内容
+less		file		##分页浏览，按“q”退出
+head		filename	##显示一个文件的前几行
+head -n 5	filename	##前五行
+tail		filename	##显示文件后几行
+tail -n 5 	filename	##显示一个文件的后5行
+
+5）wc统计文件容量信息
+wc	-l	行数
+	-w	字数
+	-c	字节数
+	-m	字符数
+
+#####tab键######
+在系统中table键可以自动补齐存在的命令，文件名称和某些命令的参数
+
+a+TAB x2  显示系统中所有a开有的命令
+
+
+####history历史调用######
+history			##显示历史
+hostory -c		##清除当前环境当中的历史命令
+！数字			##执行第多少行命令
+！字母			##执行最近一条以这个字母开头的命令
+ctrl +R +关键字		##执行最近一条含有这个关键字的命令
+上下键			##逐行调用命令
+
+
+#####linux中的快捷键######
+左右			##一个字符一个字符移动
+ctrl +左右		##一个字一个字移动
+ctrl    + a     	##光标移动到行首
+        + e     	##光标移动到行尾
+        + u     	##光标所在位置删除到行首
+        + k     	##光标所在位置删除到行尾
+        + r+关键字	##调出最近一条含有关键字的命令
+        + c     	##撤销以输入的命令
+        + d     	##关闭当前环境
+	+ L		##清空屏幕
+	+ shift + c	##复制
+	+ shift + v	##粘贴
+        + shift + t 	##在现有shell中重新打开一个table        
+	+ shift + n	##在shell中打开一个新的shell
+        + shift + pageup|pagedown 	##切换table
+        + alt + l      	## 锁屏
+        + alt +上|下    ##切换工作界面
+        + alt + f1|f7   ##进入图形界面
+        + alt + f2-f6   ##进入虚拟控制台  
+

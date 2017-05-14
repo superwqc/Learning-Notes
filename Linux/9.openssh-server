@@ -1,0 +1,81 @@
+########################
+####9.openssh-server####
+########################
+
+####1.openssh-server####
+
+功能：让远程主机可以通过网络访问sshd服务，开始一个安全shell
+
+####2.客户端连接方式####
+ssh	远程主机用户@远程主机ip
+[root@desktop0 ~]# ssh root@172.25.0.11
+The authenticity of host '172.25.0.11 (172.25.0.11)' can't be established.
+ECDSA key fingerprint is eb:24:0e:07:96:26:b1:04:c2:37:0c:78:2d:bc:b0:08.
+Are you sure you want to continue connecting (yes/no)? yes	##连接陌生主机时需要建立认证关系
+Warning: Permanently added '172.25.0.11' (ECDSA) to the list of known hosts.
+root@172.25.0.11's password: 				##远程用户密码
+Last login: Mon Oct  3 03:13:47 2016
+[root@server0 ~]#					##登陆成功
+
+ssh 远程主机用户@远程主机ip -X				##调用远程主机图形工具
+ssh     远程主机用户@远程主机ip		command		##直接在远程主机运行某条命令
+
+
+
+
+####3.sshkey加密####
+1.生成公钥私钥
+[root@server0 ~]# ssh-keygen 		##生成公钥私钥工具
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):[enter] 	##加密字符保存文件（建议用默认）
+Created directory '/root/.ssh'.
+Enter passphrase (empty for no passphrase): 		[enter]		##密钥密码，必须>4个字符
+Enter same passphrase again: 				[enter]		##确认密码
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:						
+ab:3c:73:2e:c8:0b:75:c8:39:3a:46:a2:22:34:84:81 root@server0.example.com
+The key's randomart image is:
++--[ RSA 2048]----+
+|o                |
+|E.               |
+|..               |
+|.  . o           |
+|.o. * . S        |
+|oo.o o   .       |
+|+ =. .  .        |
+|o. oo.+..        |
+|    ..o*.        |
++-----------------+
+[root@server0 ~]# ls /root/.ssh/
+id_rsa  id_rsa.pub
+id_rsa		##私钥，就是钥匙
+id_rsa.pub	##公钥，就是锁
+
+2.添加key认证方式
+[root@server0 ~]# ssh-copy-id -i /root/.ssh/id_rsa.pub  root@172.25.0.11
+ssh-copy-id		##添加key认证方式的工具
+-i			##指定加密key文件
+/root/.ssh/id_rsa.pub	##加密key
+root			##加密用户为root
+172.25.0.11		##被加密主机ip
+
+3.分发钥匙给client主机
+[root@server0 ~]# scp /root/.ssh/id_rsa root@172.25.0.10:/root/.ssh/
+
+4.测试
+
+[root@desktop0 ~]# ssh root@172.25.0.11		##通过id_rsa直接连接不需要输入用户密码
+Last login: Mon Oct  3 03:58:10 2016 from 172.25.0.250
+[root@server0 ~]# 
+
+####4.提升openssh的安全级别####
+1.openssh-server配置文件
+/etc/ssh/sshd_config
+78 PasswordAuthentication yes|no		##是否开启用户密码认证，yes为支持no为关闭
+48 PermitRootLogin yes|no			##是否允许超级用户登陆
+49 AllowUsers student westos			##用户白名单，只有在名单中出现的用户可以使用sshd建立shell
+50 DenyUsers westos				##用户黑名单
+
+
+
