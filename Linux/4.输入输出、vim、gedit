@@ -1,0 +1,168 @@
+########################
+#### 1.管理输入输出 ####
+########################
+
+在linux系统中，正确输出的编号为1，错误输出编号为2
+
+在系统中用普通用户执行 "student"
+find /etc -name passwd 
+因为student用户权限问题会有以下输出
+find: ‘/etc/pki/CA/private’: Permission denied		##没有进入权力，报错
+find: ‘/etc/pki/rsyslog’: Permission denied
+find: ‘/etc/audit’: Permission denied
+/etc/passwd						##正确输出
+find: ‘/etc/polkit-1/rules.d’: Permission denied
+find: ‘/etc/polkit-1/localauthority’: Permission denied
+find: ‘/etc/dhcp’: Permission denied
+find: ‘/etc/selinux/targeted/modules/active’: Permission denied
+find: ‘/etc/lvm/archive’: Permission denied
+find: ‘/etc/lvm/backup’: Permission denied
+find: ‘/etc/lvm/cache’: Permission denied
+find: ‘/etc/grub.d’: Permission denied
+/etc/pam.d/passwd					##正确输出
+find: ‘/etc/audisp’: Permission denied
+find: ‘/etc/firewalld’: Permission denied
+find: ‘/etc/cups/ssl’: Permission denied
+find: ‘/etc/ipsec.d’: Permission denied
+find: ‘/etc/libvirt’: Permission denied
+find: ‘/etc/sudoers.d’: Permission denied
+find: ‘/etc/named’: Permission denied
+
+find /etc -name passwd > file		##重定向正确输出
+find /etc -name passwd 2> file		##重定向错误输出
+find /etc -name passwd &> file		##重定向所有输出
+
+注意： >, 2> ,&>  都会覆盖源文件内容
+>file					##清空file
+
+find /etc -name passwd >> file		##追加正确输出
+find /etc -name passwd 2>> file		##追加错误输出
+find /etc -name passwd &>> file		##追加所有输出
+
+注意：>> 2>> &>> 不会覆盖源文件内容，会把相应的输出字符方到文件的最后
+
+
+| 管道，管道的作用是将前一条命令的输出变成管道后命令的输入
+
+ls /bin | wc -l		##统计ls /bin 命令输出的行数
+
+系统中错误的输出是无法通过管道的。
+用 2>&1 可以把错误的输出编号由2变成1
+tee	复制输出到指定位置
+date |tee file |wc -l	###tee命令复制date命令的输出到file中，并统计输出行数
+
+
+
+
+
+##############
+####2.vim ####
+##############
+
+####1.vim 命令模式####
+
+在vim的命令模式下可以配置vim的工作方式
+:set nu			##行号添加
+:set nonu		##取消行号
+:set mouse=a		##添加鼠标选择
+:set cursorline		##行线显示
+
+以上设定都是临时的，
+永久设定方式
+vim /etc/vimrc		###此文件为vim的配置文件，在此文件最后加入以上参数，加到文件中的才数不需要:
+
+
+####2.vim命令模式下关键字搜索####
+/关键字
+n向下匹配
+N向上匹配
+
+####3.vim命令模式下字符的管理####
+1.字符的复制
+yl		##复制一个字母
+y3l		##复制3个字母
+yw		##复制一个单词
+y3w		##复制3个单词
+yy		##复制一行
+y3y		##复制3行
+p		##复制完成后按“P”粘贴
+
+2.字符的删除
+dl		##删除一个字母
+d3l		##删除3个字母
+dw		##删除一个单词
+d3w		##删除3个单词
+dd		##删除一行
+d3d		##删除3行
+
+3.字符的剪切
+cl		##剪切一个字母
+c3l		##剪切3个字母
+cw		##剪切一个单词
+c3w		##剪切3个单词
+cc		##剪切一行
+c3c		##剪切3行
+esc ---> p	##剪切过后会进入到插入模式，在执行粘贴动作时一定要退出插入模式
+
+####4.vim的可视化模式####
+
+在命令模式下按“ctrl+v”进入到可视模式
+在可视模式下可以区域选择字符
+
+可视模式下批量添加字符
+*>> ctrl+v 选中要加入字符所在列
+*>> 按“I”进入插入模式，写入要加入的字符
+*>> 按esc
+
+####5.批量修改字符####
+
+:%s/原有字符/替换后字符		##只替换每一行中出现的第一个原有字符
+:%s/原有字符/替换后字符/g 	##替换所有
+:%s/^\ *//g			##把全文行首的空格去掉,"^\ *"表示行首的空格
+
+####6.vim的分屏功能###
+ctrl+w s 	###上下分屏
+ctrl+w v	###左右分屏
+ctrl+w c	###关闭光标所在屏幕
+ctrl+w 上下左右 ###光标移动到指定屏幕
+:sp file2	##同时编辑当前文件和file2
+####7.vim光标移动#####
+在命令模式下
+:数字		##移动到指定的行
+G		##文件最后一行
+gg		##文件第一行
+
+在插入模式下
+i		##光标所在位置插入
+I		##光标所在行行首
+a		##光标所在字符的下一个位置
+A		##光标所在行行尾
+o		##光标所在行下一行
+O		##光标所在行上一行
+s		##删除光标所在字符插入
+S		##删除光标所在行插入
+
+####8.vim的退出模式
+:q		##当用vim打开文件但没有对字符作任何操作时可直接退出
+:q!		##当用vim打开文件并对字符作操作，放弃所有操作退出
+:wq		##保存退出
+:wq!		##强行保存退出，对超级用户及文件所有人生效
+
+####9.vim手册####
+vimtutor	##vim的手册
+:q		##退出vimtutor
+
+#################
+#### 3.gedit ####
+#################
+
+ctrl+n			##在gedit中打开一个新的tab
+ctrl+s			##保存文件
+ctrl+o			##打开文件
+ctrl+x			##剪切字符
+ctrl+v			##粘贴字符
+ctrl+c			##复制字符
+yelp help:gedit		##gedit的图形手册
+
+##end##
+
