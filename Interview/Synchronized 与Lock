@@ -1,8 +1,0 @@
-Synchronized 与Lock都是可重入锁，同一个线程再次进入同步代码的时候.可以使用自己已经获取到的锁。
-
-Synchronized是悲观锁机制，独占锁。而Locks.ReentrantLock是，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。 
-ReentrantLock适用场景
-
-某个线程在等待一个锁的控制权的这段时间需要中断
-需要分开处理一些wait-notify，ReentrantLock里面的Condition应用，能够控制notify哪个线程，锁可以绑定多个条件。
-具有公平锁功能，每个到来的线程都将排队等候。

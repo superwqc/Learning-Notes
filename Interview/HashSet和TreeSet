@@ -1,3 +1,0 @@
-Hashset 的底层是由哈希表实现的，Treeset 底层是由红黑树实现的。如果需要在Treeset 中插入对象，需要实现Comparable 接口，为其指定比较策略。
-HashSet它的元素是无序的。add()，remove()，contains()方法的时间复杂度是O(1)。 
-TreeSet是由一个树形的结构来实现的，它里面的元素是有序的。因此，add()，remove()，contains()方法的时间复杂度是O(logn)。
