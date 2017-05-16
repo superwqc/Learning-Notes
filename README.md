@@ -26,30 +26,6 @@
 
 **JavaSE**
 
--  [Java和C++](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E5%92%8CC%2B%2B)
--  [Finalize()和析构函数(finalization)](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Finalize()%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0(finalization))
--  [Collection](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Collection)
--  [HashMap和HashTable](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/HashMap%E5%92%8CHashTable)
--  [HashMap源码解析](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/HashMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)
--  [ConcurrentHashMap](https://github.com/superwqc/Learning-notes/blob/master/Java/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAConcurrentHashMap)
--  [ArrayList源码解析](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/ArrayList%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)
--  [ArrayList和LinkedList](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/LinkedList%E5%92%8CArrayList)
--  [Java集合类框架的最佳实践有哪些](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Java%E9%9B%86%E5%90%88%E7%B1%BB%E6%A1%86%E6%9E%B6%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%9C%89%E5%93%AA%E4%BA%9B)
--  [NIO Channel和Buffer](https://github.com/superwqc/Learning-notes/blob/master/Java/NIO%20Channel%E5%92%8CBuffer)
--  [Volatile、Transient、Static](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Volatile%E3%80%81Transient%E3%80%81Static)
--  [wait()和sleep()](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/wait()%E5%92%8Csleep())
--  [反射（Reflection）](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E5%8F%8D%E5%B0%84%EF%BC%88Reflection%EF%BC%89)
--  [StringBuilder和StringBuffer](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/StringBuilder%E5%92%8CStringBuffer)
--  [容器(Container)](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Container)
--  [Multithread](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%8A%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%BA%94%E7%94%A8)
--  [ThreadLocal](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/ThreadLocal)
--  [Enumeration和Iterator](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/Enumeration%E5%92%8CIterator)
--  [堆结构 永久代(Perm Gen space)](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E5%A0%86%E7%BB%93%E6%9E%84%20%20%E4%BB%80%E4%B9%88%E6%98%AF%E5%A0%86%E4%B8%AD%E7%9A%84%E6%B0%B8%E4%B9%85%E4%BB%A3(Perm%20Gen%20space)%3F)
--  [两种异常类型](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E4%B8%A4%E7%A7%8D%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B)
--  [JVM加载一个类的过程](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/JVM%E5%8A%A0%E8%BD%BD%E4%B8%80%E4%B8%AA%E7%B1%BB%E7%9A%84%E8%BF%87%E7%A8%8B)
--  [双亲委派模型机制、意义、方法](https://github.com/superwqc/Thinking-in-java/blob/master/Interview/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%E6%9C%BA%E5%88%B6%E3%80%81%E6%84%8F%E4%B9%89%E3%80%81%E6%96%B9%E6%B3%95)
-
-
 ***JavaWeb***
 
 -  [System Architecture](https://github.com/superwqc/Learning-notes/blob/master/Servlet/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%88%86%E6%9E%90.txt)
